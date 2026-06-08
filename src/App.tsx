@@ -3,11 +3,6 @@ import * as Icons from 'lucide-react';
 import { CATEGORIES, TOOLS } from './tools/registry';
 import './App.css';
 
-interface HistoryItem {
-  time: string;
-  toolName: string;
-  desc: string;
-}
 
 export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
@@ -29,15 +24,16 @@ export default function App() {
     }
   });
 
-  // Calculation History
-  const [history, setHistory] = useState<HistoryItem[]>(() => {
-    try {
-      return JSON.parse(localStorage.getItem('calc_history') || '[]');
-    } catch {
-      return [];
-    }
-  });
-  const [showHistory, setShowHistory] = useState(false);
+  // Header Search Dropdown State
+  const [headerQuery, setHeaderQuery] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const headerSearchRef = useRef<HTMLDivElement>(null);
+  const headerInputRef = useRef<HTMLInputElement>(null);
+
+  // Command Palette State
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+  const [paletteQuery, setPaletteQuery] = useState('');
+  const paletteInputRef = useRef<HTMLInputElement>(null);
 
   // Toast State
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -76,17 +72,6 @@ export default function App() {
       }
     }
   };
-
-  // Header Search Dropdown State
-  const [headerQuery, setHeaderQuery] = useState('');
-  const [showDropdown, setShowDropdown] = useState(false);
-  const headerSearchRef = useRef<HTMLDivElement>(null);
-  const headerInputRef = useRef<HTMLInputElement>(null);
-
-  // Command Palette State
-  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
-  const [paletteQuery, setPaletteQuery] = useState('');
-  const paletteInputRef = useRef<HTMLInputElement>(null);
 
   // Apply Theme
   useEffect(() => {
@@ -149,16 +134,18 @@ export default function App() {
   // Global calculation logger
   useEffect(() => {
     (window as any).logCalculation = (toolName: string, desc: string) => {
-      setHistory(prev => {
-        const item: HistoryItem = {
+      try {
+        const prevHistory = JSON.parse(localStorage.getItem('calc_history') || '[]');
+        const item = {
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           toolName,
           desc
         };
-        const newHistory = [item, ...prev].slice(0, 15);
+        const newHistory = [item, ...prevHistory].slice(0, 15);
         localStorage.setItem('calc_history', JSON.stringify(newHistory));
-        return newHistory;
-      });
+      } catch {
+        // ignore
+      }
     };
   }, []);
 
@@ -191,10 +178,6 @@ export default function App() {
     });
   };
 
-  const clearHistory = () => {
-    setHistory([]);
-    localStorage.removeItem('calc_history');
-  };
 
   // Helper to render icons dynamically
   const renderIcon = (name: string, size = 20, className = '') => {
@@ -609,8 +592,12 @@ export default function App() {
             <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '15px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
               <span>© {new Date().getFullYear()} Hub tools Inc. All rights reserved.</span>
               <div style={{ display: 'flex', gap: '15px' }}>
-                <Icons.Globe size={16} onClick={handleGlobeClick} style={{ cursor: 'pointer' }} title="Region Settings" />
-                <Icons.Share2 size={16} onClick={handleShare} style={{ cursor: 'pointer' }} title="Share website" />
+                <span onClick={handleGlobeClick} style={{ cursor: 'pointer' }} title="Region Settings">
+                  <Icons.Globe size={16} />
+                </span>
+                <span onClick={handleShare} style={{ cursor: 'pointer' }} title="Share website">
+                  <Icons.Share2 size={16} />
+                </span>
               </div>
             </div>
           </footer>
