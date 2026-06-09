@@ -674,6 +674,14 @@ export default function App() {
                   <a href="#" style={{ cursor: 'pointer' }}>Cookies Manager</a>
                 </div>
               </div>
+              <div>
+                <h4 style={{ fontSize: '0.85rem', marginBottom: '12px' }}>Portals</h4>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                  <a href="https://www.effectivecpmnetwork.com/hgz53fwb?key=604f09908fc20874955621b88a9c8ca6" target="_blank" rel="noopener noreferrer" style={{ cursor: 'pointer' }}>CPM Portal 1</a>
+                  <a href="https://www.effectivecpmnetwork.com/x946vg2zs4?key=247400cdfbed66491d3f84b3f3652bc6" target="_blank" rel="noopener noreferrer" style={{ cursor: 'pointer' }}>CPM Portal 2</a>
+                  <a href="https://www.effectivecpmnetwork.com/y64k0hg8e?key=b6e031570e1ac4dcce264194b1bf0101" target="_blank" rel="noopener noreferrer" style={{ cursor: 'pointer' }}>CPM Portal 3</a>
+                </div>
+              </div>
             </div>
             <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '15px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
               <span>© {new Date().getFullYear()} Hub tools Inc. All rights reserved.</span>
