@@ -362,7 +362,7 @@ aside button:hover {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr repeat(5, 1fr);
+  grid-template-columns: 1.5fr repeat(4, 1fr);
   gap: 24px;
 }
 

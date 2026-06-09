@@ -629,6 +629,63 @@ export default function App() {
 
           {/* Modern SaaS Footer */}
           <footer className="modern-footer">
+            {/* Featured Direct Portals Row above the footer links */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px', borderBottom: '1px solid var(--border-color)', paddingBottom: '32px' }}>
+              <h4 style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-muted)' }}>
+                <Icons.ExternalLink size={16} className="text-gradient" /> Featured Direct Portals
+              </h4>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+                <a
+                  href="https://www.effectivecpmnetwork.com/hgz53fwb?key=604f09908fc20874955621b88a9c8ca6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                  style={{
+                    padding: '12px 16px',
+                    fontSize: '0.85rem',
+                    textDecoration: 'none',
+                    justifyContent: 'center',
+                    background: 'var(--bg-tertiary)',
+                    borderRadius: 'var(--radius-md)',
+                  }}
+                >
+                  <Icons.Globe size={16} /> CPM Portal 1
+                </a>
+                <a
+                  href="https://www.effectivecpmnetwork.com/x946vg2zs4?key=247400cdfbed66491d3f84b3f3652bc6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                  style={{
+                    padding: '12px 16px',
+                    fontSize: '0.85rem',
+                    textDecoration: 'none',
+                    justifyContent: 'center',
+                    background: 'var(--bg-tertiary)',
+                    borderRadius: 'var(--radius-md)',
+                  }}
+                >
+                  <Icons.Cpu size={16} /> CPM Portal 2
+                </a>
+                <a
+                  href="https://www.effectivecpmnetwork.com/y64k0hg8e?key=b6e031570e1ac4dcce264194b1bf0101"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                  style={{
+                    padding: '12px 16px',
+                    fontSize: '0.85rem',
+                    textDecoration: 'none',
+                    justifyContent: 'center',
+                    background: 'var(--bg-tertiary)',
+                    borderRadius: 'var(--radius-md)',
+                  }}
+                >
+                  <Icons.Zap size={16} /> CPM Portal 3
+                </a>
+              </div>
+            </div>
+
             <div className="footer-grid">
               <div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
@@ -672,14 +729,6 @@ export default function App() {
                   <a href="#" style={{ cursor: 'pointer' }}>Privacy Policy</a>
                   <a href="#" style={{ cursor: 'pointer' }}>Terms of Service</a>
                   <a href="#" style={{ cursor: 'pointer' }}>Cookies Manager</a>
-                </div>
-              </div>
-              <div>
-                <h4 style={{ fontSize: '0.85rem', marginBottom: '12px' }}>Portals</h4>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                  <a href="https://www.effectivecpmnetwork.com/hgz53fwb?key=604f09908fc20874955621b88a9c8ca6" target="_blank" rel="noopener noreferrer" style={{ cursor: 'pointer' }}>CPM Portal 1</a>
-                  <a href="https://www.effectivecpmnetwork.com/x946vg2zs4?key=247400cdfbed66491d3f84b3f3652bc6" target="_blank" rel="noopener noreferrer" style={{ cursor: 'pointer' }}>CPM Portal 2</a>
-                  <a href="https://www.effectivecpmnetwork.com/y64k0hg8e?key=b6e031570e1ac4dcce264194b1bf0101" target="_blank" rel="noopener noreferrer" style={{ cursor: 'pointer' }}>CPM Portal 3</a>
                 </div>
               </div>
             </div>
