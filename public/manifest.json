@@ -3,7 +3,7 @@
   "name": "Calculator & Converter Hub",
   "icons": [
     {
-      "src": "/src/assets/logo.svg",
+      "src": "/favicon.svg",
       "type": "image/svg+xml",
       "sizes": "any"
     }
