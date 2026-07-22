@@ -10,103 +10,103 @@
 
   <!-- Categories -->
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=age-date</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/age-date</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=converters</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/converters</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=currency</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/currency</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=finance</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/finance</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=health</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/health</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=academic</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/academic</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=travel</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/travel</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=lifestyle</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/lifestyle</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=vehicle</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/vehicle</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=shopping</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/shopping</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=fitness</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/fitness</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=personal</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/personal</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=banking</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/banking</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=business</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/business</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=weather</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/weather</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=realestate</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/realestate</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?category=nutrition</loc>
+    <loc>https://calculator-converter-hub.vercel.app/category/nutrition</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -114,301 +114,301 @@
 
   <!-- Tools -->
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=age-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/age-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=date-difference</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/date-difference</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=countdown-timer</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/countdown-timer</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=unit-converter</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/unit-converter</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=currency-converter</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/currency-converter</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=emi-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/emi-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=sip-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/sip-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=compound-interest</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/compound-interest</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=bmi-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/bmi-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=bmr-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/bmr-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=water-intake</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/water-intake</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=scientific-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/scientific-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=gpa-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/gpa-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=percentage-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/percentage-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=timezone-converter</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/timezone-converter</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=world-clock</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/world-clock</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=packing-checklist</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/packing-checklist</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=electricity-bill</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/electricity-bill</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=rent-affordability</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/rent-affordability</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=paint-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/paint-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=fuel-mileage</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/fuel-mileage</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=ev-charging</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/ev-charging</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=vehicle-depreciation</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/vehicle-depreciation</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=discount-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/discount-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=profit-margin</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/profit-margin</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=vat-gst</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/vat-gst</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=running-pace</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/running-pace</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=workout-calorie</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/workout-calorie</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=one-rep-max</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/one-rep-max</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=protein-intake</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/protein-intake</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=pregnancy-due-date</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/pregnancy-due-date</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=ovulation-calculator</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/ovulation-calculator</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=life-expectancy</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/life-expectancy</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=loan-eligibility</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/loan-eligibility</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=savings-goal</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/savings-goal</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=inflation-purchasing</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/inflation-purchasing</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=gold-loan</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/gold-loan</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=life-insurance</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/life-insurance</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=break-even</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/break-even</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=roi-gains</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/roi-gains</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=startup-runway</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/startup-runway</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=weather-aqi</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/weather-aqi</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=carbon-footprint</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/carbon-footprint</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=solar-savings</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/solar-savings</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=rental-yield</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/rental-yield</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=home-affordability</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/home-affordability</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=property-appreciation</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/property-appreciation</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=macro-nutrient</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/macro-nutrient</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=healthy-weight</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/healthy-weight</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://calculator-converter-hub.vercel.app/?tool=meal-planner</loc>
+    <loc>https://calculator-converter-hub.vercel.app/tools/meal-planner</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

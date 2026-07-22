@@ -7,12 +7,36 @@ import './App.css';
 export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const [activeToolId, setActiveToolId] = useState<string | null>(() => {
+    const path = window.location.pathname;
+    const cleanPath = path.replace(/^\/+|\/+$/g, '');
+    if (cleanPath.startsWith('tools/')) {
+      return cleanPath.substring(6);
+    }
+    // Fallback: check query parameters for backward compatibility
     const params = new URLSearchParams(window.location.search);
-    return params.get('tool');
+    const toolParam = params.get('tool');
+    if (toolParam) return toolParam;
+
+    // Direct path fallback (e.g. /age-calculator)
+    const foundTool = TOOLS.find(t => t.id === cleanPath);
+    if (foundTool) return foundTool.id;
+    return null;
   });
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(() => {
+    const path = window.location.pathname;
+    const cleanPath = path.replace(/^\/+|\/+$/g, '');
+    if (cleanPath.startsWith('category/')) {
+      return cleanPath.substring(9);
+    }
+    // Fallback: check query parameters for backward compatibility
     const params = new URLSearchParams(window.location.search);
-    return params.get('category');
+    const catParam = params.get('category');
+    if (catParam) return catParam;
+
+    // Direct path fallback (e.g. /age-date)
+    const foundCat = CATEGORIES.find(c => c.id === cleanPath);
+    if (foundCat) return foundCat.id;
+    return null;
   });
   const [searchQuery, setSearchQuery] = useState('');
   const [bookmarks, setBookmarks] = useState<string[]>(() => {
@@ -30,29 +54,44 @@ export default function App() {
     }
   });
 
-  // Sync state changes to browser URL
+  // Sync state changes to browser URL using clean pathing
   useEffect(() => {
-    const url = new URL(window.location.href);
+    let path = '/';
     if (activeToolId) {
-      url.searchParams.set('tool', activeToolId);
-      url.searchParams.delete('category');
+      path = `/tools/${activeToolId}`;
     } else if (activeCategoryId) {
-      url.searchParams.set('category', activeCategoryId);
-      url.searchParams.delete('tool');
-    } else {
-      url.search = '';
+      path = `/category/${activeCategoryId}`;
     }
-    if (window.location.search !== url.search) {
-      window.history.pushState(null, '', url.pathname + url.search);
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, '', path);
     }
   }, [activeToolId, activeCategoryId]);
 
   // Handle browser back and forward actions (popstate)
   useEffect(() => {
     const handlePopState = () => {
-      const params = new URLSearchParams(window.location.search);
-      setActiveToolId(params.get('tool'));
-      setActiveCategoryId(params.get('category'));
+      const path = window.location.pathname;
+      const cleanPath = path.replace(/^\/+|\/+$/g, '');
+      if (cleanPath.startsWith('tools/')) {
+        setActiveToolId(cleanPath.substring(6));
+        setActiveCategoryId(null);
+      } else if (cleanPath.startsWith('category/')) {
+        setActiveCategoryId(cleanPath.substring(9));
+        setActiveToolId(null);
+      } else {
+        const foundTool = TOOLS.find(t => t.id === cleanPath);
+        const foundCat = CATEGORIES.find(c => c.id === cleanPath);
+        if (foundTool) {
+          setActiveToolId(foundTool.id);
+          setActiveCategoryId(null);
+        } else if (foundCat) {
+          setActiveCategoryId(foundCat.id);
+          setActiveToolId(null);
+        } else {
+          setActiveToolId(null);
+          setActiveCategoryId(null);
+        }
+      }
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -73,14 +112,14 @@ export default function App() {
         if (tool.seoKeywords) {
           keywords = tool.seoKeywords.join(', ');
         }
-        canonical = `https://calculator-converter-hub.vercel.app/?tool=${activeToolId}`;
+        canonical = `https://calculator-converter-hub.vercel.app/tools/${activeToolId}`;
       }
     } else if (activeCategoryId) {
       const category = CATEGORIES.find(c => c.id === activeCategoryId);
       if (category) {
         title = `${category.name} Tools - Calculator & Converter Hub`;
         description = category.description;
-        canonical = `https://calculator-converter-hub.vercel.app/?category=${activeCategoryId}`;
+        canonical = `https://calculator-converter-hub.vercel.app/category/${activeCategoryId}`;
       }
     }
 
@@ -324,20 +363,25 @@ export default function App() {
         {/* Shortcuts / Quick Menu */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
           <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px', paddingLeft: '8px' }}>Dashboard</h4>
-          <button
-            onClick={() => { setActiveCategoryId(null); setActiveToolId(null); setSearchQuery(''); }}
+          <a
+            href="/"
+            onClick={(e) => { e.preventDefault(); setActiveCategoryId(null); setActiveToolId(null); setSearchQuery(''); }}
             className="btn-secondary"
             style={{
               justifyContent: 'flex-start',
               padding: '10px 12px',
               fontSize: '0.9rem',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
               backgroundColor: !activeCategoryId && !activeToolId ? 'rgba(var(--accent-glow-rgb), 0.1)' : 'transparent',
               color: !activeCategoryId && !activeToolId ? 'var(--accent-primary)' : 'var(--text-primary)',
               borderColor: 'transparent',
             }}
           >
             <Icons.LayoutGrid size={18} /> Home Dashboard
-          </button>
+          </a>
         </div>
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)' }} />
@@ -346,21 +390,26 @@ export default function App() {
           <h4 style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px', paddingLeft: '8px' }}>Categories</h4>
           
           {CATEGORIES.map(cat => (
-            <button
+            <a
               key={cat.id}
-              onClick={() => { setActiveCategoryId(cat.id); setActiveToolId(null); setSearchQuery(''); }}
+              href={`/category/${cat.id}`}
+              onClick={(e) => { e.preventDefault(); setActiveCategoryId(cat.id); setActiveToolId(null); setSearchQuery(''); }}
               className="btn-secondary"
               style={{
                 justifyContent: 'flex-start',
                 padding: '10px 12px',
                 fontSize: '0.9rem',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
                 backgroundColor: activeCategoryId === cat.id && !activeToolId ? 'rgba(var(--accent-glow-rgb), 0.1)' : 'transparent',
                 color: activeCategoryId === cat.id && !activeToolId ? 'var(--accent-primary)' : 'var(--text-primary)',
                 borderColor: 'transparent',
               }}
             >
               {renderIcon(cat.icon, 18)} {cat.name}
-            </button>
+            </a>
           ))}
         </div>
 
@@ -561,16 +610,16 @@ export default function App() {
                   </h3>
                   <div className="tool-grid">
                     {TOOLS.filter(t => bookmarks.includes(t.id)).map(tool => (
-                      <div key={tool.id} className="glass-card" onClick={() => selectTool(tool.id)} style={{ cursor: 'pointer' }}>
+                      <a href={`/tools/${tool.id}`} key={tool.id} className="glass-card" onClick={(e) => { e.preventDefault(); selectTool(tool.id); }} style={{ cursor: 'pointer', textDecoration: 'none', color: 'inherit', display: 'block' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                           <div style={{ color: 'var(--accent-primary)' }}>{renderIcon(tool.icon, 22)}</div>
-                          <button onClick={(e) => toggleBookmark(tool.id, e)} style={{ background: 'none', padding: 0 }} title="Unbookmark">
+                          <button onClick={(e) => { e.stopPropagation(); toggleBookmark(tool.id, e); }} style={{ background: 'none', padding: 0 }} title="Unbookmark">
                             <Icons.Bookmark size={16} fill="var(--accent-primary)" color="var(--accent-primary)" />
                           </button>
                         </div>
                         <h4 style={{ marginBottom: '6px' }}>{tool.name}</h4>
                         <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{tool.description}</p>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -586,16 +635,16 @@ export default function App() {
                   </h3>
                   <div className="tool-grid">
                     {filteredTools.map(tool => (
-                      <div key={tool.id} className="glass-card" onClick={() => selectTool(tool.id)} style={{ cursor: 'pointer', position: 'relative' }}>
+                      <a href={`/tools/${tool.id}`} key={tool.id} className="glass-card" onClick={(e) => { e.preventDefault(); selectTool(tool.id); }} style={{ cursor: 'pointer', position: 'relative', textDecoration: 'none', color: 'inherit', display: 'block' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                           <div style={{ color: 'var(--accent-primary)' }}>{renderIcon(tool.icon, 22)}</div>
-                          <button onClick={(e) => toggleBookmark(tool.id, e)} style={{ background: 'none', padding: 4 }} title="Bookmark">
+                          <button onClick={(e) => { e.stopPropagation(); toggleBookmark(tool.id, e); }} style={{ background: 'none', padding: 4 }} title="Bookmark">
                             <Icons.Bookmark size={16} fill={bookmarks.includes(tool.id) ? 'var(--accent-primary)' : 'none'} color={bookmarks.includes(tool.id) ? 'var(--accent-primary)' : 'currentColor'} />
                           </button>
                         </div>
                         <h4 style={{ marginBottom: '8px' }}>{tool.name}</h4>
                         <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', minHeight: '40px' }}>{tool.description}</p>
-                      </div>
+                      </a>
                     ))}
                   </div>
                   {filteredTools.length === 0 && (
@@ -621,16 +670,16 @@ export default function App() {
                         </div>
                         <div className="tool-grid">
                           {catTools.map(tool => (
-                            <div key={tool.id} className="glass-card" onClick={() => selectTool(tool.id)} style={{ cursor: 'pointer', position: 'relative' }}>
+                            <a href={`/tools/${tool.id}`} key={tool.id} className="glass-card" onClick={(e) => { e.preventDefault(); selectTool(tool.id); }} style={{ cursor: 'pointer', position: 'relative', textDecoration: 'none', color: 'inherit', display: 'block' }}>
                               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                                 <div style={{ color: 'var(--accent-primary)' }}>{renderIcon(tool.icon, 22)}</div>
-                                <button onClick={(e) => toggleBookmark(tool.id, e)} style={{ background: 'none', padding: 4 }} title="Bookmark">
+                                <button onClick={(e) => { e.stopPropagation(); toggleBookmark(tool.id, e); }} style={{ background: 'none', padding: 4 }} title="Bookmark">
                                   <Icons.Bookmark size={16} fill={bookmarks.includes(tool.id) ? 'var(--accent-primary)' : 'none'} color={bookmarks.includes(tool.id) ? 'var(--accent-primary)' : 'currentColor'} />
                                 </button>
                               </div>
                               <h4 style={{ marginBottom: '8px' }}>{tool.name}</h4>
                               <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', minHeight: '40px' }}>{tool.description}</p>
-                            </div>
+                            </a>
                           ))}
                         </div>
                       </div>
@@ -714,19 +763,19 @@ export default function App() {
               <div>
                 <h4 style={{ fontSize: '0.85rem', marginBottom: '12px' }}>Products</h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                  <a onClick={() => selectTool('gold-loan')} style={{ cursor: 'pointer' }}>Gold Loan Calc</a>
-                  <a onClick={() => selectTool('life-insurance')} style={{ cursor: 'pointer' }}>Life Insurance Calc</a>
-                  <a onClick={() => selectTool('compound-interest')} style={{ cursor: 'pointer' }}>Compound Interest</a>
-                  <a onClick={() => selectTool('currency-converter')} style={{ cursor: 'pointer' }}>Currency Live Hub</a>
+                  <a href="/tools/gold-loan" onClick={(e) => { e.preventDefault(); selectTool('gold-loan'); }} style={{ cursor: 'pointer' }}>Gold Loan Calc</a>
+                  <a href="/tools/life-insurance" onClick={(e) => { e.preventDefault(); selectTool('life-insurance'); }} style={{ cursor: 'pointer' }}>Life Insurance Calc</a>
+                  <a href="/tools/compound-interest" onClick={(e) => { e.preventDefault(); selectTool('compound-interest'); }} style={{ cursor: 'pointer' }}>Compound Interest</a>
+                  <a href="/tools/currency-converter" onClick={(e) => { e.preventDefault(); selectTool('currency-converter'); }} style={{ cursor: 'pointer' }}>Currency Live Hub</a>
                 </div>
               </div>
               <div>
                 <h4 style={{ fontSize: '0.85rem', marginBottom: '12px' }}>Categories</h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                  <a onClick={() => { setActiveCategoryId('banking'); setActiveToolId(null); setSearchQuery(''); }} style={{ cursor: 'pointer' }}>Banking & Money</a>
-                  <a onClick={() => { setActiveCategoryId('converters'); setActiveToolId(null); setSearchQuery(''); }} style={{ cursor: 'pointer' }}>Unit Converters</a>
-                  <a onClick={() => { setActiveCategoryId('academic'); setActiveToolId(null); setSearchQuery(''); }} style={{ cursor: 'pointer' }}>Academic & Math</a>
-                  <a onClick={() => { setActiveCategoryId('converters'); setActiveToolId(null); setSearchQuery(''); }} style={{ cursor: 'pointer' }}>Developer Tools</a>
+                  <a href="/category/banking" onClick={(e) => { e.preventDefault(); setActiveCategoryId('banking'); setActiveToolId(null); setSearchQuery(''); }} style={{ cursor: 'pointer' }}>Banking & Money</a>
+                  <a href="/category/converters" onClick={(e) => { e.preventDefault(); setActiveCategoryId('converters'); setActiveToolId(null); setSearchQuery(''); }} style={{ cursor: 'pointer' }}>Unit Converters</a>
+                  <a href="/category/academic" onClick={(e) => { e.preventDefault(); setActiveCategoryId('academic'); setActiveToolId(null); setSearchQuery(''); }} style={{ cursor: 'pointer' }}>Academic & Math</a>
+                  <a href="/category/converters" onClick={(e) => { e.preventDefault(); setActiveCategoryId('converters'); setActiveToolId(null); setSearchQuery(''); }} style={{ cursor: 'pointer' }}>Developer Tools</a>
                 </div>
               </div>
               <div>
