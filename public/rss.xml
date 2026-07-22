@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Calculator & Converter Hub</title>
+  <link>https://calculator-converter-hub.vercel.app</link>
+  <description>Access free online productivity calculators, unit converters, and developer utility suites.</description>
+  <lastBuildDate>Wed, 22 Jul 2026 12:16:30 GMT</lastBuildDate>
+  <pubDate>Wed, 22 Jul 2026 12:16:30 GMT</pubDate>
+  <ttl>1440</ttl>
+  <atom:link href="https://calculator-converter-hub.vercel.app/rss.xml" rel="self" type="application/rss+xml" />
+  
+  <item>
+    <title>Age Calculator</title>
+    <link>https://calculator-converter-hub.vercel.app/tools/age-calculator</link>
+    <description>Compute your exact age in years, months, weeks, days, hours, and seconds since your birthdate.</description>
+    <guid>https://calculator-converter-hub.vercel.app/tools/age-calculator</guid>
+  </item>
+  <item>
+    <title>Date Difference Calculator</title>
+    <link>https://calculator-converter-hub.vercel.app/tools/date-difference</link>
+    <description>Calculate the total days, weeks, months, and years between any two calendar dates.</description>
+    <guid>https://calculator-converter-hub.vercel.app/tools/date-difference</guid>
+  </item>
+  <item>
+    <title>Event Countdown</title>
+    <link>https://calculator-converter-hub.vercel.app/tools/countdown-timer</link>
+    <description>Set up countdown timers for custom events, weddings, projects, and holidays.</description>
+    <guid>https://calculator-converter-hub.vercel.app/tools/countdown-timer</guid>
+  </item>
+  <item>
+    <title>Universal Unit Converter</title>
+    <link>https://calculator-converter-hub.vercel.app/tools/unit-converter</link>
+    <description>Convert length, weight, volume, area, temperature, speed, time, and data units instantly.</description>
+    <guid>https://calculator-converter-hub.vercel.app/tools/unit-converter</guid>
+  </item>
+  <item>
+    <title>Live Currency Converter</title>
+    <link>https://calculator-converter-hub.vercel.app/tools/currency-converter</link>
+    <description>Calculate global exchange rates instantly using live financial rates feeds.</description>
+    <guid>https://calculator-converter-hub.vercel.app/tools/currency-converter</guid>
+  </item>
+  <item>
+    <title>Loan EMI Calculator</title>
+    <link>https://calculator-converter-hub.vercel.app/tools/emi-calculator</link>
+    <description>Calculate monthly home, auto, or personal loan payments with complete interest amortization schedule reports.</description>
+    <guid>https://calculator-converter-hub.vercel.app/tools/emi-calculator</guid>
+  </item>
+  <item>
+    <title>SIP Calculator</title>
+    <link>https://calculator-converter-hub.vercel.app/tools/sip-calculator</link>
+    <description>Calculate compounding future wealth and estimated returns on systematic investment plans in mutual funds.</description>
+    <guid>https://calculator-converter-hub.vercel.app/tools/sip-calculator</guid>
+  </item>
+  <item>
+    <title>Compound Interest Calculator</title>
+    <link>https://calculator-converter-hub.vercel.app/tools/compound-interest</link>
+    <description>Calculate compounding interest growth with custom contributions and frequency parameters.</description>
+    <guid>https://calculator-converter-hub.vercel.app/tools/compound-interest</guid>
+  </item>
+  <item>
+    <title>BMI Calculator</title>
+    <link>https://calculator-converter-hub.vercel.app/tools/bmi-calculator</link>
+    <description>Evaluate Body Mass Index (BMI) and health classifications based on World Health Organization standards.</description>
+    <guid>https://calculator-converter-hub.vercel.app/tools/bmi-calculator</guid>
+  </item>
+  <item>
+    <title>BMR Calorie Calculator</title>
+    <link>https://calculator-converter-hub.vercel.app/tools/bmr-calculator</link>
+    <description>Estimate your active Basal Metabolic Rate daily energy budget based on age, gender, and metrics.</description>
+    <guid>https://calculator-converter-hub.vercel.app/tools/bmr-calculator</guid>
+  </item>
+</channel>
+</rss>

@@ -1,6 +1,8 @@
 {
   "short_name": "CalcHub",
   "name": "Calculator & Converter Hub",
+  "description": "Access free online calculators, converters, and developer utility suites offline-ready.",
+  "categories": ["utilities", "productivity", "finance"],
   "icons": [
     {
       "src": "/favicon.svg",
