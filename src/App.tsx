@@ -6,8 +6,14 @@ import './App.css';
 
 export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
-  const [activeToolId, setActiveToolId] = useState<string | null>(null);
-  const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
+  const [activeToolId, setActiveToolId] = useState<string | null>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('tool');
+  });
+  const [activeCategoryId, setActiveCategoryId] = useState<string | null>(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('category');
+  });
   const [searchQuery, setSearchQuery] = useState('');
   const [bookmarks, setBookmarks] = useState<string[]>(() => {
     try {
@@ -23,6 +29,100 @@ export default function App() {
       return [];
     }
   });
+
+  // Sync state changes to browser URL
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (activeToolId) {
+      url.searchParams.set('tool', activeToolId);
+      url.searchParams.delete('category');
+    } else if (activeCategoryId) {
+      url.searchParams.set('category', activeCategoryId);
+      url.searchParams.delete('tool');
+    } else {
+      url.search = '';
+    }
+    if (window.location.search !== url.search) {
+      window.history.pushState(null, '', url.pathname + url.search);
+    }
+  }, [activeToolId, activeCategoryId]);
+
+  // Handle browser back and forward actions (popstate)
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      setActiveToolId(params.get('tool'));
+      setActiveCategoryId(params.get('category'));
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Update HTML header SEO metadata dynamically on route changes
+  useEffect(() => {
+    let title = 'Calculator & Converter Hub - All-in-One Online Productivity Tools';
+    let description = 'Access free online tools including exact Age Calculator, Unit Converters, Live Currency rates, Loan EMI planners, health index trackers, and JSON formatters.';
+    let keywords = 'calculator, unit converter, age calculator, emi calculator, sip planner, base64, json formatter, qr code generator, ai content generator';
+    let canonical = 'https://calculator-converter-hub.vercel.app/';
+
+    if (activeToolId) {
+      const tool = TOOLS.find(t => t.id === activeToolId);
+      if (tool) {
+        title = `${tool.name} - Calculator & Converter Hub`;
+        description = tool.description;
+        if (tool.seoKeywords) {
+          keywords = tool.seoKeywords.join(', ');
+        }
+        canonical = `https://calculator-converter-hub.vercel.app/?tool=${activeToolId}`;
+      }
+    } else if (activeCategoryId) {
+      const category = CATEGORIES.find(c => c.id === activeCategoryId);
+      if (category) {
+        title = `${category.name} Tools - Calculator & Converter Hub`;
+        description = category.description;
+        canonical = `https://calculator-converter-hub.vercel.app/?category=${activeCategoryId}`;
+      }
+    }
+
+    // Update DOM Title
+    document.title = title;
+
+    // Helper to update or create meta tags
+    const updateMetaTag = (name: string, content: string, attr = 'name') => {
+      let element = document.querySelector(`meta[${attr}="${name}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(attr, name);
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', content);
+    };
+
+    updateMetaTag('description', description);
+    updateMetaTag('keywords', keywords);
+    
+    // Open Graph Metadata
+    updateMetaTag('og:title', title, 'property');
+    updateMetaTag('og:description', description, 'property');
+    updateMetaTag('og:url', canonical, 'property');
+    updateMetaTag('og:type', 'website', 'property');
+    updateMetaTag('og:image', 'https://calculator-converter-hub.vercel.app/favicon.svg', 'property');
+
+    // Twitter Card Metadata
+    updateMetaTag('twitter:card', 'summary');
+    updateMetaTag('twitter:title', title);
+    updateMetaTag('twitter:description', description);
+    updateMetaTag('twitter:image', 'https://calculator-converter-hub.vercel.app/favicon.svg');
+
+    // Canonical link
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', canonical);
+  }, [activeToolId, activeCategoryId]);
 
   // Header Search Dropdown State
   const [headerQuery, setHeaderQuery] = useState('');
@@ -155,6 +255,7 @@ export default function App() {
 
   const selectTool = (toolId: string) => {
     setActiveToolId(toolId);
+    setActiveCategoryId(null);
     setIsPaletteOpen(false);
     setPaletteQuery('');
     
