@@ -765,17 +765,112 @@ function generateHomepageContent() {
   `).join('');
 
   return `
-    <div style="padding: 40px 24px; max-width: 1200px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif;">
+    <div style="padding: 40px 24px; max-width: 1200px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6;">
       <header style="margin-bottom: 40px; text-align: center;">
         <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 16px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Calculator & Converter Hub</h1>
-        <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto;">Your enterprise-grade utility suite of calculation algorithms, unit conversions, developers helpers, and currency tools designed for zero lag and offline usage.</p>
+        <p style="font-size: 1.25rem; color: var(--text-secondary); max-width: 800px; margin: 0 auto; font-weight: 600;">Your Trusted Free Online Calculator & Unit Converter Platform</p>
       </header>
       
       <main>
-        <section aria-label="Tool Categories">
+        <section aria-label="Introductory" style="margin-bottom: 48px;">
+          <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 16px;">
+            Welcome to <strong>Calculator & Converter Hub</strong>, your trusted destination for free online calculators, unit converters, and productivity tools. Whether you're a student solving mathematical problems, a teacher preparing lessons, an engineer performing technical calculations, a business professional analyzing financial data, or simply someone who needs quick everyday conversions, our platform is designed to provide fast, reliable, and accurate results.
+          </p>
+          <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 16px;">
+            Calculator & Converter Hub offers an extensive collection of online calculators covering mathematics, finance, health, engineering, education, science, programming, construction, business, digital storage, networking, cooking, travel, date and time calculations, and many other practical applications.
+          </p>
+          <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 16px;">
+            Every calculator is built with simplicity, speed, and accuracy in mind. Our tools work directly in your web browser without requiring software installation, user registration, or downloads. Most calculations are processed locally within your browser, helping improve performance while protecting your privacy.
+          </p>
+          <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 16px;">
+            Our mission is to make complex calculations easy for everyone. Whether you need to calculate percentages, convert units, estimate mortgage payments, determine Body Mass Index (BMI), calculate compound interest, solve algebraic equations, convert currencies, or perform engineering and scientific calculations, Calculator & Converter Hub provides dependable tools that save time and improve productivity.
+          </p>
+        </section>
+
+        <section aria-label="Tool Categories" style="margin-bottom: 48px;">
           <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">Explore Calculator Categories</h2>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 24px 0;">
             ${categoriesHtml}
+          </div>
+        </section>
+
+        <section aria-label="Who Can Use" style="margin-bottom: 48px; padding: 24px; background: var(--bg-tertiary); border-radius: 12px;">
+          <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">Who Can Use Calculator & Converter Hub?</h2>
+          <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding-left: 20px; color: var(--text-secondary);">
+            <li>Students</li>
+            <li>Teachers and Educators</li>
+            <li>Engineers</li>
+            <li>Scientists</li>
+            <li>Developers and Programmers</li>
+            <li>Business Professionals</li>
+            <li>Financial Analysts</li>
+            <li>Accountants</li>
+            <li>Researchers</li>
+            <li>Healthcare Professionals</li>
+            <li>Homeowners</li>
+            <li>Travelers</li>
+            <li>Entrepreneurs</li>
+            <li>Everyday Users</li>
+          </ul>
+        </section>
+
+        <section aria-label="Why Choose Us" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px;">Why Choose Calculator & Converter Hub?</h2>
+          <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; padding-left: 20px; color: var(--text-secondary);">
+            <li>500+ Online Calculators & 300+ Unit Converters</li>
+            <li>Fast and Accurate Results</li>
+            <li>Completely Free & No Registration Required</li>
+            <li>Mobile-Friendly Design & Cross-Device Compatibility</li>
+            <li>Privacy-Focused Local Calculations</li>
+            <li>Modern User Interface & Regular Updates</li>
+          </ul>
+        </section>
+
+        <section aria-label="Key Features & Benefits" style="margin-bottom: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+          <div>
+            <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 16px;">Key Features</h2>
+            <ul style="padding-left: 20px; color: var(--text-secondary); display: flex; flex-direction: column; gap: 8px;">
+              <li>Instant calculations with real-time results</li>
+              <li>Responsive design for desktop, tablet, and mobile</li>
+              <li>Dark mode support & powerful search</li>
+              <li>Copy and share calculation results</li>
+              <li>Formula explanations & worked examples</li>
+            </ul>
+          </div>
+          <div>
+            <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 16px;">Our Benefits</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 12px;">
+              Calculator & Converter Hub helps you perform calculations quickly, accurately, and efficiently. Whether you're studying, managing personal finances, working on engineering projects, planning investments, or converting measurement units, our tools simplify complex calculations and save valuable time.
+            </p>
+            <p style="color: var(--text-secondary);">
+              By bringing hundreds of calculators and converters together in one place, the platform eliminates the need to visit multiple websites, creating a faster and more convenient experience.
+            </p>
+          </div>
+        </section>
+
+        <section aria-label="Frequently Asked Questions" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">Frequently Asked Questions</h2>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div>
+              <strong style="font-size: 1.1rem; display: block; margin-bottom: 6px;">Is Calculator & Converter Hub free?</strong>
+              <p style="color: var(--text-secondary);">Yes. Every calculator and converter on our platform is completely free to use.</p>
+            </div>
+            <div>
+              <strong style="font-size: 1.1rem; display: block; margin-bottom: 6px;">Do I need to create an account?</strong>
+              <p style="color: var(--text-secondary);">No. You can use every calculator without registering or logging in.</p>
+            </div>
+            <div>
+              <strong style="font-size: 1.1rem; display: block; margin-bottom: 6px;">Are the calculations accurate?</strong>
+              <p style="color: var(--text-secondary);">Our calculators use widely accepted mathematical formulas and standard conversion factors. While we strive for accuracy, results should always be verified for professional, legal, financial, engineering, or medical decisions.</p>
+            </div>
+            <div>
+              <strong style="font-size: 1.1rem; display: block; margin-bottom: 6px;">Does the website work on mobile devices?</strong>
+              <p style="color: var(--text-secondary);">Yes. Calculator & Converter Hub is fully responsive and works smoothly on smartphones, tablets, laptops, and desktop computers.</p>
+            </div>
+            <div>
+              <strong style="font-size: 1.1rem; display: block; margin-bottom: 6px;">Is my personal data stored?</strong>
+              <p style="color: var(--text-secondary);">Most calculations are performed locally within your browser. We do not require personal information to use our calculators.</p>
+            </div>
           </div>
         </section>
       </main>
@@ -825,7 +920,7 @@ function run() {
       ]
     }
   ];
-  writeHTMLFile('', 'index.html', 'Calculator & Converter Hub - All-in-One Online Productivity Tools', 'Access free online tools including exact Age Calculator, Unit Converters, Live Currency rates, Loan EMI planners, health index trackers, and JSON formatters.', `${SITE_URL}/`, generateHomepageContent(), homeSchema);
+  writeHTMLFile('', 'index.html', 'Calculator & Converter Hub – Free Online Calculators & Unit Converters', 'Access 500+ free online calculators and unit converters for math, finance, health, science, engineering, education, and everyday use. Fast, accurate, secure, and mobile-friendly.', `${SITE_URL}/`, generateHomepageContent(), homeSchema);
 
   // Pre-render Categories
   for (const cat of CATEGORIES) {
