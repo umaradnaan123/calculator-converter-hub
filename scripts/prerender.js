@@ -1169,21 +1169,167 @@ function run() {
   writeHTMLFile('', '404.html', '404 - Page Not Found | Hub Tools', 'The requested page was not found.', `${SITE_URL}/404`, page404Html, null);
 
   // GENERATE XML SITEMAP
-  const allUrls = [
-    { loc: `${SITE_URL}/`, priority: '1.0', changefreq: 'daily' },
-    ...CATEGORIES.map(c => ({ loc: `${SITE_URL}/category/${c.id}`, priority: '0.8', changefreq: 'weekly' })),
-    ...TOOLS.map(t => ({ loc: `${SITE_URL}/tools/${t.id}`, priority: '0.9', changefreq: 'weekly' })),
-    ...trustPages.map(p => ({ loc: `${SITE_URL}/${p.id}`, priority: '0.5', changefreq: 'monthly' }))
-  ];
-
   const sitemapXmlContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${allUrls.map(u => `  <url>
-    <loc>${u.loc}</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
-    <changefreq>${u.changefreq}</changefreq>
-    <priority>${u.priority}</priority>
-  </url>`).join('\n')}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
+  
+  <!-- Homepage - Highest Priority -->
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Calculator Pages -->
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/calculator</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/calculator/basic</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/calculator/scientific</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/calculator/financial</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Converter Pages -->
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/converter</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/converter/length</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/converter/weight</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/converter/temperature</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/converter/currency</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/converter/volume</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/converter/area</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/converter/speed</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>
+
+  <!-- Utility Pages -->
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/about</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/contact</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/privacy</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/terms</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/faq</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <mobile:mobile/>
+  </url>
+
+  <url>
+    <loc>https://calculator-converter-hub.vercel.app/blog</loc>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+    <mobile:mobile/>
+  </url>
+
 </urlset>`;
 
   fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXmlContent);
