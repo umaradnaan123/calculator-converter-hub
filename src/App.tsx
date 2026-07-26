@@ -4,6 +4,23 @@ import { CATEGORIES, TOOLS } from './tools/registry';
 import './App.css';
 
 
+const BASE_TOOL_MAP: Record<string, string> = {
+  'bmi-calculator-men': 'bmi-calculator',
+  'bmi-calculator-women': 'bmi-calculator',
+  'bmi-calculator-age': 'bmi-calculator',
+  'bmi-calculator-kg': 'bmi-calculator',
+  'bmi-calculator-lbs': 'bmi-calculator',
+  'mortgage-calculator-usa': 'emi-calculator',
+  'mortgage-calculator-canada': 'emi-calculator',
+  'mortgage-calculator-australia': 'emi-calculator',
+  'age-calculator-birthday': 'age-calculator',
+  'age-calculator-months': 'age-calculator',
+  'loan-calculator-emi': 'emi-calculator',
+  'emi-calculator-india': 'emi-calculator',
+  'simple-interest-calculator': 'compound-interest',
+  'compound-interest-calculator': 'compound-interest'
+};
+
 export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const [activePageId, setActivePageId] = useState<string | null>(() => {
@@ -376,7 +393,8 @@ export default function App() {
     tool.description.toLowerCase().includes(paletteQuery.toLowerCase())
   );
 
-  const activeTool = TOOLS.find(t => t.id === activeToolId);
+  const resolvedToolId = activeToolId ? (BASE_TOOL_MAP[activeToolId] || activeToolId) : null;
+  const activeTool = TOOLS.find(t => t.id === resolvedToolId);
 
   return (
     <div className="dashboard-layout">

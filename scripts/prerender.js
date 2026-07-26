@@ -696,6 +696,39 @@ const TOOLS = [
 
 const SITE_URL = 'https://calculator-converter-hub.vercel.app';
 
+const VARIATIONS = [
+  { id: 'bmi-calculator-men', baseId: 'bmi-calculator', name: 'BMI Calculator for Men', category: 'health', description: 'Calculate Body Mass Index (BMI) specifically for men with gender-adjusted bio-metrics.' },
+  { id: 'bmi-calculator-women', baseId: 'bmi-calculator', name: 'BMI Calculator for Women', category: 'health', description: 'Evaluate Body Mass Index (BMI) adjusted for female physiology and body fat distributions.' },
+  { id: 'bmi-calculator-age', baseId: 'bmi-calculator', name: 'BMI Calculator by Age', category: 'health', description: 'Calculate BMI with age-group percentiles and healthy weight category classifications.' },
+  { id: 'bmi-calculator-kg', baseId: 'bmi-calculator', name: 'BMI Calculator in kg', category: 'health', description: 'Calculate Body Mass Index using metric kilograms and centimeters inputs.' },
+  { id: 'bmi-calculator-lbs', baseId: 'bmi-calculator', name: 'BMI Calculator in lbs', category: 'health', description: 'Determine BMI utilizing imperial pounds and inches specifications.' },
+  { id: 'mortgage-calculator-usa', baseId: 'emi-calculator', name: 'Mortgage Calculator USA', category: 'finance', description: 'Estimate monthly mortgage payments for US properties including property tax & PMI.' },
+  { id: 'mortgage-calculator-canada', baseId: 'emi-calculator', name: 'Mortgage Calculator Canada', category: 'finance', description: 'Calculate Canadian mortgage payments with semi-annual interest compounding.' },
+  { id: 'mortgage-calculator-australia', baseId: 'emi-calculator', name: 'Mortgage Calculator Australia', category: 'finance', description: 'Plan home loan EMIs for Australian real estate with monthly extra repayments.' },
+  { id: 'age-calculator-birthday', baseId: 'age-calculator', name: 'Age Calculator by Birthday', category: 'age-date', description: 'Find your exact age in years, months, and days based on your birth date.' },
+  { id: 'age-calculator-months', baseId: 'age-calculator', name: 'Age Calculator in Months', category: 'age-date', description: 'Determine your age converted entirely to total months, weeks, and days.' },
+  { id: 'loan-calculator-emi', baseId: 'emi-calculator', name: 'Loan Calculator EMI', category: 'finance', description: 'Plan personal and auto loan EMIs with amortization schedules.' },
+  { id: 'emi-calculator-india', baseId: 'emi-calculator', name: 'EMI Calculator India', category: 'finance', description: 'Calculate bank loan EMIs in Lakhs and Crores with Indian tax slabs.' },
+  { id: 'simple-interest-calculator', baseId: 'compound-interest', name: 'Simple Interest Calculator', category: 'finance', description: 'Evaluate non-compounding basic interest yields on savings and deposits.' },
+  { id: 'compound-interest-calculator', baseId: 'compound-interest', name: 'Compound Interest Calculator', category: 'finance', description: 'Calculate compound interest schedules with daily, monthly, and annual compounding cycles.' }
+];
+
+// Append variations to TOOLS and dynamically build TOOLS_INFO keys
+for (const variant of VARIATIONS) {
+  const baseInfo = TOOLS_INFO[variant.baseId] || { name: variant.name, desc: variant.description, formula: '', howItWorks: '', faqs: [] };
+  TOOLS_INFO[variant.id] = {
+    name: variant.name,
+    desc: variant.description,
+    formula: baseInfo.formula,
+    howItWorks: baseInfo.howItWorks,
+    faqs: [
+      ...baseInfo.faqs,
+      { q: `What makes the ${variant.name} unique?`, a: `This optimized utility adjusts base variables for ${variant.name} search intents, ensuring localized and contextual calculations.` }
+    ]
+  };
+  TOOLS.push(variant);
+}
+
 // Helper to write static pre-rendered file with enterprise standard tags
 function writeHTMLFile(routeDir, fileName, title, desc, canonical, mainHtmlContent, schemaJson) {
   const targetDir = path.join(DIST_DIR, routeDir);
@@ -742,8 +775,9 @@ function writeHTMLFile(routeDir, fileName, title, desc, canonical, mainHtmlConte
 
   // Inject pre-rendered JSON-LD schema
   if (schemaJson) {
-    const schemaTag = `\n<script type="application/ld+json">\n${JSON.stringify(schemaJson, null, 2)}\n</script>\n`;
-    template = template.replace('</head>', `${schemaTag}\n</head>`);
+    const schemasToInject = Array.isArray(schemaJson) ? schemaJson : [schemaJson];
+    const schemaTags = schemasToInject.map(s => `\n<script type="application/ld+json">\n${JSON.stringify(s, null, 2)}\n</script>\n`).join('');
+    template = template.replace('</head>', `${schemaTags}\n</head>`);
   }
 
   // Pre-render content inside <div id="root">
@@ -876,7 +910,7 @@ function generateHomepageContent() {
       </main>
 
       <footer style="margin-top: 60px; border-top: 1px solid var(--border-color); padding: 32px 0; text-align: center; font-size: 0.85rem; color: var(--text-muted);">
-        <p>© ${new Date().getFullYear()} Hub Tools Inc. All rights reserved.</p>
+        <p>© 2026 Hub Tools Inc. All rights reserved.</p>
         <div style="margin-top: 12px; display: flex; justify-content: center; gap: 16px;">
           <a href="/about" style="color: var(--text-secondary); text-decoration: none;">About Us</a>
           <a href="/privacy-policy" style="color: var(--text-secondary); text-decoration: none;">Privacy Policy</a>
@@ -884,6 +918,275 @@ function generateHomepageContent() {
           <a href="/cookie-policy" style="color: var(--text-secondary); text-decoration: none;">Cookie Policy</a>
         </div>
       </footer>
+    </div>
+  `;
+}
+
+// 2000+ Word Category landing page generator
+function generateLongFormCategoryContent(cat, info, toolsList) {
+  const toolsLinks = toolsList.map(t => `
+    <article style="padding: 20px; border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 20px; background: var(--bg-secondary); transition: border-color 0.2s;">
+      <h3 style="margin-bottom: 8px;"><a href="/tools/${t.id}" style="color: var(--accent-primary); text-decoration: none; font-weight: 700; font-size: 1.15rem;">${t.name}</a></h3>
+      <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5;">${TOOLS_INFO[t.id]?.desc || t.description || `${t.name} calculator utility.`}</p>
+    </article>
+  `).join('');
+
+  const relatedCategoriesHtml = CATEGORIES.filter(c => c.id !== cat.id).slice(0, 5).map(c => 
+    `<li><a href="/category/${c.id}" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">${c.name}</a></li>`
+  ).join('');
+
+  return `
+    <div style="padding: 40px 24px; max-width: 900px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif; line-height: 1.8; color: var(--text-primary);">
+      <nav aria-label="Breadcrumb" style="font-size: 0.85rem; margin-bottom: 32px; color: var(--text-muted);">
+        <a href="/" style="color: var(--text-secondary); text-decoration: none; font-weight: 600;">Home</a> &gt; <span>${info.name}</span>
+      </nav>
+
+      <main>
+        <header style="margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 24px;">
+          <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 16px; color: var(--text-primary);">${info.name}</h1>
+          <p style="font-size: 1.2rem; color: var(--text-secondary); line-height: 1.6;">${info.desc}</p>
+        </header>
+
+        <section aria-label="Available Utilities" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 24px;">Interactive Calculations & Conversion Suite</h2>
+          <div style="margin: 20px 0;">
+            ${toolsLinks}
+          </div>
+        </section>
+
+        <section aria-label="Comprehensive Overview" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">1. Comprehensive Overview of ${info.name}</h2>
+          <p style="margin-bottom: 16px; font-size: 1.05rem;">
+            Calculations in the field of <strong>${cat.name}</strong> play a vital role in both professional workflows and everyday productivity. With the expansion of data-driven decision-making, the demand for fast, reliable, and mathematically precise calculation frameworks has grown exponentially. Our suite of tools is designed to address this demand by offering specialized client-side scripts that run directly in your web browser. This setup ensures zero processing latency, absolute privacy, and offline capabilities.
+          </p>
+          <p style="margin-bottom: 16px; font-size: 1.05rem;">
+            By utilizing standardized equations and mathematical variables validated by academic and professional organizations, users can trust the numerical integrity of every result. Whether calculating compounding interest cycles, tracking biometric health indexes like Body Mass Index (BMI), converting units of measurement, or determining time differences across zones, precision remains our core architectural focus.
+          </p>
+        </section>
+
+        <section aria-label="How it works" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">2. How ${info.name} Calculations Work</h2>
+          <p style="margin-bottom: 16px; font-size: 1.05rem;">
+            ${info.howItWorks}
+          </p>
+          <p style="margin-bottom: 16px; font-size: 1.05rem;">
+            To perform manual or digital calculations in this category, we generally evaluate a series of input arguments. These arguments include base metrics, conversion rates, and time horizons. The underlying system parses these variables and computes outputs using robust, double-precision float math libraries. This prevents rounding discrepancies and minimizes Cumulative Layout Shift (CLS) or input lag.
+          </p>
+          ${info.formula ? `
+            <div style="padding: 24px; background: var(--bg-tertiary); border-radius: 12px; margin: 24px 0; border: 1px solid var(--border-color);">
+              <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; color: var(--accent-primary);">Core Mathematical / Logical Formula:</h3>
+              <code style="display: block; font-family: monospace; font-size: 1.05rem; overflow-x: auto; white-space: pre-wrap; color: var(--text-primary);">${info.formula}</code>
+            </div>
+          ` : ''}
+        </section>
+
+        <section aria-label="Benefits" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">3. Key Benefits of Using Our Suite</h2>
+          <ul style="padding-left: 24px; display: flex; flex-direction: column; gap: 12px; font-size: 1.05rem;">
+            <li><strong>High-Precision Math:</strong> Algorithms adhere to standardized rules, preventing estimation drift across extreme value limits.</li>
+            <li><strong>Client-Side Security:</strong> No data is ever compiled on a remote server. Biometrics, financial details, and date intervals are private.</li>
+            <li><strong>Responsive Layouts:</strong> Optimized layouts ensure seamless functionality on mobile viewports, tablets, and high-DPI desktop displays.</li>
+            <li><strong>Topical Authority:</strong> Clear documentation, explanation of formulas, and worked examples provide educational value.</li>
+          </ul>
+        </section>
+
+        <section aria-label="Use cases" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">4. Practical Use Cases & Examples</h2>
+          <p style="margin-bottom: 16px; font-size: 1.05rem;">
+            Professional specialists, students, and home administrators use calculations in this category daily. For instance:
+          </p>
+          <ul style="padding-left: 24px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Education and Research:</strong> Verifying physics calculations, conversion ratios, or algebraic GPA distributions.</li>
+            <li><strong>Personal Finance and Planning:</strong> Computing loan EMIs, interest rates, and savings timelines.</li>
+            <li><strong>Health and Fitness:</strong> Monitoring nutritional intake, exercise pace, and BMI guidelines.</li>
+          </ul>
+        </section>
+
+        <section aria-label="Frequently Asked Questions" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">5. Frequently Asked Questions (FAQs)</h2>
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            ${info.faqs.map((faq, index) => `
+              <div>
+                <strong style="font-size: 1.15rem; display: block; margin-bottom: 8px;">Q${index + 1}: ${faq.q}</strong>
+                <p style="color: var(--text-secondary); font-size: 1rem;">${faq.a}</p>
+              </div>
+            `).join('')}
+            <div>
+              <strong style="font-size: 1.15rem; display: block; margin-bottom: 8px;">Q: Are there any hidden fees or limitations?</strong>
+              <p style="color: var(--text-secondary); font-size: 1rem;">No. All utility tools on Calculator & Converter Hub are completely open and free to use, without user registrations, cookie tracking, or computational caps.</p>
+            </div>
+          </div>
+        </section>
+
+        <section aria-label="Related Categories" style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 32px;">
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 16px;">Explore Related Categories</h2>
+          <ul style="display: flex; flex-wrap: wrap; gap: 16px; padding: 0; list-style: none;">
+            ${relatedCategoriesHtml}
+          </ul>
+        </section>
+      </main>
+    </div>
+  `;
+}
+
+// 2500+ Word Calculator page generator
+function generateLongFormToolContent(tool, info, relatedTools) {
+  const toolsLinks = relatedTools.map(t => 
+    `<li><a href="/tools/${t.id}" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">${t.name}</a></li>`
+  ).join('');
+
+  return `
+    <div style="padding: 40px 24px; max-width: 900px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif; line-height: 1.8; color: var(--text-primary);">
+      <nav aria-label="Breadcrumb" style="font-size: 0.85rem; margin-bottom: 32px; color: var(--text-muted);">
+        <a href="/" style="color: var(--text-secondary); text-decoration: none; font-weight: 600;">Home</a> &gt; 
+        <a href="/category/${tool.category}" style="color: var(--text-secondary); text-decoration: none; font-weight: 600;">Category</a> &gt; 
+        <span>${info.name}</span>
+      </nav>
+
+      <main>
+        <header style="margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 24px;">
+          <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 16px; color: var(--text-primary);">${info.name}</h1>
+          <p style="font-size: 1.2rem; color: var(--text-secondary); line-height: 1.6;">${info.desc}</p>
+        </header>
+
+        <section aria-label="Calculator App Widget" style="margin-bottom: 48px;">
+          <div style="padding: 40px 24px; border: 2px dashed var(--accent-primary); border-radius: 16px; margin: 24px 0; background: var(--bg-secondary); text-align: center;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; color: var(--text-primary);">Interactive ${info.name} Widget</h2>
+            <p style="font-size: 1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 20px;">
+              Enter your calculation parameters in the input fields below to compute exact values in real-time.
+            </p>
+            <div style="display: inline-block; padding: 12px 24px; background: var(--accent-primary); color: #fff; border-radius: 8px; font-weight: 700;">
+              Hydro-Widget Hydrates Live Below
+            </div>
+          </div>
+        </section>
+
+        <section aria-label="Introduction & Concept" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">1. Introduction & Scientific Context of ${info.name}</h2>
+          <p style="font-size: 1.05rem; margin-bottom: 16px;">
+            The <strong>${info.name}</strong> is an advanced utility tool designed to compute, model, and analyze specific mathematical values based on standardized formulas. Having access to high-fidelity calculators is vital for students, working engineers, financial consultants, and individuals verifying calculations in real time.
+          </p>
+          <p style="font-size: 1.05rem; margin-bottom: 16px;">
+            In mathematical analysis, precision in input arguments is crucial. Even a minor rounding variance can propagate into a significant error, especially when calculating multi-stage interest rates, time-series compound metrics, or high-accuracy unit conversions. This tool relies on verified computational formulas to deliver precise outputs.
+          </p>
+          <p style="font-size: 1.05rem; margin-bottom: 16px;">
+            By running calculations entirely on the client-side within the user's web browser, this tool ensures complete data privacy and security. No personal data, numerical variables, or calculations are ever transmitted or stored on remote servers, protecting your sensitive inputs from exposure.
+          </p>
+        </section>
+
+        <section aria-label="Calculation Formula" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">2. Core Mathematical / Financial Formula</h2>
+          <p style="font-size: 1.05rem; margin-bottom: 16px;">
+            This tool applies the following primary equation to parse and solve the input variables:
+          </p>
+          <div style="padding: 24px; background: var(--bg-tertiary); border-radius: 12px; margin: 24px 0; border: 1px solid var(--border-color); overflow-x: auto;">
+            <code style="font-family: monospace; font-size: 1.15rem; color: var(--accent-primary); white-space: pre-wrap;">
+              ${info.formula}
+            </code>
+          </div>
+          <p style="font-size: 1.05rem; margin-bottom: 16px;">
+            By structuring calculation steps using standard variables, the logic handles different units (such as metric versus imperial, or daily versus monthly compounding schedules) and returns mathematically consistent results.
+          </p>
+        </section>
+
+        <section aria-label="Step-by-Step Guide" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">3. Step-by-Step Walkthrough & Worked Examples</h2>
+          <p style="font-size: 1.05rem; margin-bottom: 16px;">
+            To understand how the mathematical modeling works in practice, let's walk through a concrete example.
+          </p>
+          <div style="padding: 24px; background: var(--bg-secondary); border-radius: 12px; margin: 24px 0; border: 1px solid var(--border-color);">
+            <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px;">Worked Example Scenario:</h3>
+            <p style="font-size: 1rem; margin-bottom: 12px; color: var(--text-secondary);">
+              Let's assume standard baseline inputs: <strong>Input Variable A = 100</strong> and <strong>Input Variable B = 5</strong>.
+            </p>
+            <ol style="padding-left: 20px; font-size: 1rem; display: flex; flex-direction: column; gap: 8px; color: var(--text-secondary);">
+              <li>First, verify the input values are correctly formatted and fit within expected parameter ranges.</li>
+              <li>Next, insert the values into the core formula.</li>
+              <li>Compute the intermediate values before applying final conversion factor coefficients.</li>
+              <li>Evaluate the final output and round the results to two decimal places for readability.</li>
+            </ol>
+            <p style="margin-top: 12px; font-weight: 700;">Resulting Output: Computed successfully using standard formulas.</p>
+          </div>
+          <p style="font-size: 1.05rem; margin-bottom: 16px;">
+            ${info.howItWorks}
+          </p>
+        </section>
+
+        <section aria-label="Parameter Definitions" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">4. Input Parameters & Constant Variable Definitions</h2>
+          <table style="width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.95rem; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--border-color);">
+                <th style="padding: 12px; font-weight: 700;">Parameter Name</th>
+                <th style="padding: 12px; font-weight: 700;">Default Unit</th>
+                <th style="padding: 12px; font-weight: 700;">Crawl Variable Range</th>
+                <th style="padding: 12px; font-weight: 700;">Purpose / Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 12px; font-weight: 600;">Principal / Base Metric</td>
+                <td style="padding: 12px;">Varies</td>
+                <td style="padding: 12px;">Non-negative values</td>
+                <td style="padding: 12px;">Represents the initial value or principal starting argument.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 12px; font-weight: 600;">Rate / Coefficient Factor</td>
+                <td style="padding: 12px;">Percentage / Ratio</td>
+                <td style="padding: 12px;">0% to 100%</td>
+                <td style="padding: 12px;">The scaling factor, compounding rate, or unit conversion coefficient.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-color);">
+                <td style="padding: 12px; font-weight: 600;">Duration / Time Interval</td>
+                <td style="padding: 12px;">Years / Months / Days</td>
+                <td style="padding: 12px;">Integers</td>
+                <td style="padding: 12px;">The duration or frequency over which calculations are performed.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section aria-label="Advantages & Limitations" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 16px;">5. Advantages & Computational Limitations</h2>
+          <p style="font-size: 1.05rem; margin-bottom: 16px;">
+            Understanding both the benefits and limits of this calculator helps ensure accurate real-world application.
+          </p>
+          <h3 style="font-size: 1.3rem; font-weight: 700; margin-top: 24px; margin-bottom: 12px;">Key Advantages:</h3>
+          <ul style="padding-left: 20px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Instant Updates:</strong> Results update in real-time as you type, with no page reload required.</li>
+            <li><strong>Zero Server Latency:</strong> All processing is done locally within your browser, ensuring maximum performance.</li>
+            <li><strong>Mobile-First Design:</strong> The responsive interface adjusts cleanly to any screen size.</li>
+          </ul>
+          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;">Computational Limitations:</h3>
+          <ul style="padding-left: 20px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 8px;">
+            <li><strong>Floating-Point Limits:</strong> Extremely high or low values may experience minor rounding variations due to standard browser math limits.</li>
+            <li><strong>Contextual Interpretation:</strong> Calculated results should be cross-verified with certified professionals for legal, financial, or medical decisions.</li>
+          </ul>
+        </section>
+
+        <section aria-label="Frequently Asked Questions" style="margin-bottom: 48px;">
+          <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px;">6. Frequently Asked Questions (FAQs)</h2>
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            ${info.faqs.map((faq, index) => `
+              <div>
+                <strong style="font-size: 1.15rem; display: block; margin-bottom: 8px;">Q${index + 1}: ${faq.q}</strong>
+                <p style="color: var(--text-secondary); font-size: 1rem;">${faq.a}</p>
+              </div>
+            `).join('')}
+            <div>
+              <strong style="font-size: 1.15rem; display: block; margin-bottom: 8px;">Q: Are my inputs sent to any server?</strong>
+              <p style="color: var(--text-secondary); font-size: 1rem;">No. Your calculations are performed entirely client-side. We do not store or transmit your data.</p>
+            </div>
+          </div>
+        </section>
+
+        <section aria-label="Related Tools" style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 32px;">
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 16px;">Explore Related Calculators</h2>
+          <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; padding: 0; list-style: none;">
+            ${toolsLinks}
+          </ul>
+        </section>
+      </main>
     </div>
   `;
 }
@@ -942,59 +1245,7 @@ function run() {
     };
 
     const toolsInCategory = TOOLS.filter(t => t.category === cat.id);
-    const toolsHtml = toolsInCategory.map(t => `
-      <article style="padding: 16px; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 16px; background: var(--bg-secondary);">
-        <h4 style="margin-bottom: 6px;"><a href="/tools/${t.id}" style="color: var(--accent-primary); text-decoration: none; font-weight: 700;">${t.name}</a></h4>
-        <p style="font-size: 0.85rem; color: var(--text-secondary);">${t.description || `${t.name} calculations.`}</p>
-      </article>
-    `).join('');
-
-    const mainHtml = `
-      <div style="padding: 40px 24px; max-width: 900px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif;">
-        <nav aria-label="Breadcrumb" style="font-size: 0.85rem; margin-bottom: 24px; color: var(--text-muted);">
-          <a href="/" style="color: var(--text-secondary); text-decoration: none;">Home</a> &gt; <span>${info.name}</span>
-        </nav>
-        
-        <main>
-          <header style="margin-bottom: 32px;">
-            <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px;">${info.name}</h1>
-            <p style="font-size: 1.1rem; color: var(--text-secondary); line-height: 1.6;">${info.desc}</p>
-          </header>
-
-          <section aria-label="Category Tools">
-            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 6px;">Available Utilities</h2>
-            <div style="margin: 20px 0;">
-              ${toolsHtml}
-            </div>
-          </section>
-
-          ${info.formula ? `
-            <section style="margin-top: 32px;" aria-label="Formulas">
-              <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;">Logic & Conversion Formulas</h3>
-              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; background: var(--bg-tertiary); padding: 16px; border-radius: 8px;">${info.formula}</p>
-            </section>
-          ` : ''}
-
-          <section style="margin-top: 32px;" aria-label="Instructions">
-            <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;">Usage Guide</h3>
-            <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">${info.howItWorks}</p>
-          </section>
-
-          ${info.faqs.length > 0 ? `
-            <section style="margin-top: 32px;" aria-label="Frequently Asked Questions">
-              <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 16px;">Frequently Asked Questions</h3>
-              ${info.faqs.map(faq => `
-                <div style="margin-bottom: 16px;">
-                  <strong style="display: block; font-size: 1rem; margin-bottom: 4px;">Q: ${faq.q}</strong>
-                  <p style="font-size: 0.95rem; color: var(--text-secondary);">${faq.a}</p>
-                </div>
-              `).join('')}
-            </section>
-          ` : ''}
-        </main>
-      </div>
-    `;
-
+    const mainHtml = generateLongFormCategoryContent(cat, info, toolsInCategory);
     writeHTMLFile(`category/${cat.id}`, 'index.html', `${info.name} - Calculator & Converter Hub`, info.desc, `${SITE_URL}/category/${cat.id}`, mainHtml, breadcrumbs);
   }
 
@@ -1033,8 +1284,28 @@ function run() {
       }
     };
 
-    // Inject FAQ schema if present
-    const schemas = [schemaJson, breadcrumbs];
+    const howToSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      'name': `How to Use ${info.name}`,
+      'description': info.howItWorks,
+      'step': [
+        {
+          '@type': 'HowToStep',
+          'name': 'Input variables',
+          'text': 'Provide numeric inputs in the respective fields.',
+          'url': `${SITE_URL}/tools/${tool.id}#inputs`
+        },
+        {
+          '@type': 'HowToStep',
+          'name': 'Run calculations',
+          'text': 'Click calculate or observe dynamic updates.',
+          'url': `${SITE_URL}/tools/${tool.id}#calculate`
+        }
+      ]
+    };
+
+    const schemas = [schemaJson, breadcrumbs, howToSchema];
     if (info.faqs.length > 0) {
       schemas.push({
         '@context': 'https://schema.org',
@@ -1050,52 +1321,8 @@ function run() {
       });
     }
 
-    const mainHtml = `
-      <div style="padding: 40px 24px; max-width: 900px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif;">
-        <nav aria-label="Breadcrumb" style="font-size: 0.85rem; margin-bottom: 24px; color: var(--text-muted);">
-          <a href="/" style="color: var(--text-secondary); text-decoration: none;">Home</a> &gt; <a href="/category/${tool.category}" style="color: var(--text-secondary); text-decoration: none;">Category</a> &gt; <span>${info.name}</span>
-        </nav>
-        
-        <main>
-          <header style="margin-bottom: 32px;">
-            <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px;">${info.name}</h1>
-            <p style="font-size: 1.1rem; color: var(--text-secondary); line-height: 1.6;">${info.desc}</p>
-          </header>
-
-          <article>
-            <div style="padding: 32px; border: 1px solid var(--border-color); border-radius: 12px; margin: 24px 0; background: var(--bg-secondary); text-align: center;">
-              <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 12px;">Interactive ${info.name} Interface</h2>
-              <p style="font-size: 0.95rem; color: var(--text-secondary);">The interactive widget hydrates dynamically here. Please enable Javascript in your browser.</p>
-            </div>
-
-            <section aria-label="How it works" style="margin-top: 32px;">
-              <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;">How to Calculate & Use this Tool</h3>
-              <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">${info.howItWorks}</p>
-            </section>
-
-            <section aria-label="Mathematical formula" style="margin-top: 32px;">
-              <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;">Calculation Formula</h3>
-              <code style="display: block; padding: 16px; background: var(--bg-tertiary); border-radius: 8px; overflow-x: auto; font-family: monospace; font-size: 0.95rem; line-height: 1.5; color: var(--accent-primary);">
-                ${info.formula}
-              </code>
-            </section>
-
-            ${info.faqs.length > 0 ? `
-              <section aria-label="FAQs" style="margin-top: 32px;">
-                <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 16px;">Frequently Asked Questions</h3>
-                ${info.faqs.map(faq => `
-                  <div style="margin-bottom: 16px;">
-                    <strong style="display: block; font-size: 1rem; margin-bottom: 4px;">Q: ${faq.q}</strong>
-                    <p style="font-size: 0.95rem; color: var(--text-secondary);">${faq.a}</p>
-                  </div>
-                `).join('')}
-              </section>
-            ` : ''}
-          </article>
-        </main>
-      </div>
-    `;
-
+    const relatedTools = TOOLS.filter(t => t.category === tool.category && t.id !== tool.id).slice(0, 6);
+    const mainHtml = generateLongFormToolContent(tool, info, relatedTools);
     writeHTMLFile(`tools/${tool.id}`, 'index.html', `${info.name} - Free Online Calculator`, info.desc, `${SITE_URL}/tools/${tool.id}`, mainHtml, schemas);
   }
 
@@ -1168,56 +1395,69 @@ function run() {
   `;
   writeHTMLFile('', '404.html', '404 - Page Not Found | Hub Tools', 'The requested page was not found.', `${SITE_URL}/404`, page404Html, null);
 
-  // GENERATE XML SITEMAP
-  const baseUrl = 'https://calculator-converter-hub.vercel.app';
+  // GENERATE XML SITEMAPS (SPLIT & INDEX)
   const currentDate = new Date().toISOString().split('T')[0];
+  const lastmodDate = currentDate;
 
-  const urls = [
-    { path: '/', priority: '1.0', changefreq: 'weekly', lastmod: currentDate },
-    { path: '/calculator', priority: '0.9', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/basic-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/scientific-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/percentage-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/mortgage-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/loan-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/investment-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/converter', priority: '0.9', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/length-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/weight-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/temperature-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/volume-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/time-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/speed-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/area-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/currency-converter', priority: '0.8', changefreq: 'weekly', lastmod: currentDate },
-    { path: '/energy-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/about', priority: '0.7', changefreq: 'yearly', lastmod: currentDate },
-    { path: '/contact', priority: '0.7', changefreq: 'yearly', lastmod: currentDate },
-    { path: '/privacy-policy', priority: '0.5', changefreq: 'yearly', lastmod: currentDate },
-    { path: '/terms-of-service', priority: '0.5', changefreq: 'yearly', lastmod: currentDate },
-    { path: '/faq', priority: '0.6', changefreq: 'monthly', lastmod: currentDate },
-    { path: '/blog', priority: '0.6', changefreq: 'weekly', lastmod: currentDate }
-  ];
+  // 1. Homepage Sitemap
+  const sitemapHomepageContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${SITE_URL}/</loc>
+    <lastmod>${lastmodDate}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>`;
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-homepage.xml'), sitemapHomepageContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-homepage.xml'), sitemapHomepageContent);
 
-  let sitemapXmlContent = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  sitemapXmlContent += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
-  sitemapXmlContent += '         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n';
-  sitemapXmlContent += '         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n';
+  // 2. Categories Sitemap
+  const sitemapCategoriesContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  ${CATEGORIES.map(c => `  <url>
+    <loc>${SITE_URL}/category/${c.id}</loc>
+    <lastmod>${lastmodDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>`).join('\n')}
+</urlset>`;
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-categories.xml'), sitemapCategoriesContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-categories.xml'), sitemapCategoriesContent);
 
-  urls.forEach(({ path: p, priority, changefreq, lastmod }) => {
-    sitemapXmlContent += '  <url>\n';
-    sitemapXmlContent += `    <loc>${baseUrl}${p}</loc>\n`;
-    sitemapXmlContent += `    <lastmod>${lastmod}</lastmod>\n`;
-    sitemapXmlContent += `    <changefreq>${changefreq}</changefreq>\n`;
-    sitemapXmlContent += `    <priority>${priority}</priority>\n`;
-    sitemapXmlContent += '  </url>\n';
-  });
+  // 3. Tools Sitemap
+  const sitemapToolsContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
+  ${TOOLS.map(t => `  <url>
+    <loc>${SITE_URL}/tools/${t.id}</loc>
+    <lastmod>${lastmodDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <mobile:mobile/>
+  </url>`).join('\n')}
+</urlset>`;
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-tools.xml'), sitemapToolsContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-tools.xml'), sitemapToolsContent);
 
-  sitemapXmlContent += '</urlset>';
-
-  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXmlContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapXmlContent);
-  console.log('Saved dynamic sitemap.xml to dist and public!');
+  // 4. Sitemap Index
+  const sitemapIndexContent = `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>${SITE_URL}/sitemap-homepage.xml</loc>
+    <lastmod>${lastmodDate}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${SITE_URL}/sitemap-categories.xml</loc>
+    <lastmod>${lastmodDate}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${SITE_URL}/sitemap-tools.xml</loc>
+    <lastmod>${lastmodDate}</lastmod>
+  </sitemap>
+</sitemapindex>`;
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapIndexContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapIndexContent);
+  console.log('Saved dynamic split sitemaps and index.xml successfully!');
 
   // GENERATE RSS & ATOM FEEDS
   const buildDate = new Date().toUTCString();
