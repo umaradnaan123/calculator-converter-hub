@@ -1169,168 +1169,51 @@ function run() {
   writeHTMLFile('', '404.html', '404 - Page Not Found | Hub Tools', 'The requested page was not found.', `${SITE_URL}/404`, page404Html, null);
 
   // GENERATE XML SITEMAP
-  const sitemapXmlContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
-  
-  <!-- Homepage - Highest Priority -->
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <mobile:mobile/>
-  </url>
+  const baseUrl = 'https://calculator-converter-hub.vercel.app';
+  const currentDate = new Date().toISOString().split('T')[0];
 
-  <!-- Calculator Pages -->
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/calculator</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <mobile:mobile/>
-  </url>
+  const urls = [
+    { path: '/', priority: '1.0', changefreq: 'weekly', lastmod: currentDate },
+    { path: '/calculator', priority: '0.9', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/basic-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/scientific-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/percentage-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/mortgage-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/loan-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/investment-calculator', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/converter', priority: '0.9', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/length-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/weight-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/temperature-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/volume-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/time-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/speed-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/area-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/currency-converter', priority: '0.8', changefreq: 'weekly', lastmod: currentDate },
+    { path: '/energy-converter', priority: '0.8', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/about', priority: '0.7', changefreq: 'yearly', lastmod: currentDate },
+    { path: '/contact', priority: '0.7', changefreq: 'yearly', lastmod: currentDate },
+    { path: '/privacy-policy', priority: '0.5', changefreq: 'yearly', lastmod: currentDate },
+    { path: '/terms-of-service', priority: '0.5', changefreq: 'yearly', lastmod: currentDate },
+    { path: '/faq', priority: '0.6', changefreq: 'monthly', lastmod: currentDate },
+    { path: '/blog', priority: '0.6', changefreq: 'weekly', lastmod: currentDate }
+  ];
 
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/calculator/basic</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <mobile:mobile/>
-  </url>
+  let sitemapXmlContent = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  sitemapXmlContent += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n';
+  sitemapXmlContent += '         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n';
+  sitemapXmlContent += '         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n';
 
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/calculator/scientific</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <mobile:mobile/>
-  </url>
+  urls.forEach(({ path: p, priority, changefreq, lastmod }) => {
+    sitemapXmlContent += '  <url>\n';
+    sitemapXmlContent += `    <loc>${baseUrl}${p}</loc>\n`;
+    sitemapXmlContent += `    <lastmod>${lastmod}</lastmod>\n`;
+    sitemapXmlContent += `    <changefreq>${changefreq}</changefreq>\n`;
+    sitemapXmlContent += `    <priority>${priority}</priority>\n`;
+    sitemapXmlContent += '  </url>\n';
+  });
 
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/calculator/financial</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <mobile:mobile/>
-  </url>
-
-  <!-- Converter Pages -->
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/converter</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/converter/length</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/converter/weight</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/converter/temperature</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/converter/currency</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/converter/volume</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/converter/area</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/converter/speed</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <mobile:mobile/>
-  </url>
-
-  <!-- Utility Pages -->
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/about</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/contact</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/privacy</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/terms</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/faq</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <mobile:mobile/>
-  </url>
-
-  <url>
-    <loc>https://calculator-converter-hub.vercel.app/blog</loc>
-    <lastmod>2026-07-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.75</priority>
-    <mobile:mobile/>
-  </url>
-
-</urlset>`;
+  sitemapXmlContent += '</urlset>';
 
   fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXmlContent);
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapXmlContent);
