@@ -9,6 +9,15 @@ const DIST_DIR = path.join(__dirname, '..', 'dist');
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 const TEMPLATE_PATH = path.join(DIST_DIR, 'index.html');
 
+function escapeXML(str) {
+  if (!str) return '';
+  return str.replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&apos;');
+}
+
 // Comprehensive Categories Meta Database
 const CATEGORIES_INFO = {
   'age-date': {
@@ -1669,7 +1678,7 @@ Every dynamic calculations utility operates on standard formula modules compiled
   const rssXmlContent = `<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-  <title>Calculator & Converter Hub</title>
+  <title>Calculator &amp; Converter Hub</title>
   <link>${SITE_URL}</link>
   <description>Access free online productivity calculators, unit converters, and developer utility suites.</description>
   <lastBuildDate>${buildDate}</lastBuildDate>
@@ -1680,9 +1689,9 @@ Every dynamic calculations utility operates on standard formula modules compiled
     const info = TOOLS_INFO[t.id] || { name: t.name, desc: '' };
     return `
   <item>
-    <title>${info.name}</title>
+    <title>${escapeXML(info.name)}</title>
     <link>${SITE_URL}/tools/${t.id}</link>
-    <description>${info.desc}</description>
+    <description>${escapeXML(info.desc)}</description>
     <guid>${SITE_URL}/tools/${t.id}</guid>
   </item>`;
   }).join('')}
@@ -1695,7 +1704,7 @@ Every dynamic calculations utility operates on standard formula modules compiled
 
   const atomXmlContent = `<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Calculator & Converter Hub</title>
+  <title>Calculator &amp; Converter Hub</title>
   <subtitle>Access free online productivity calculators, unit converters, and developer utility suites.</subtitle>
   <link href="${SITE_URL}/atom.xml" rel="self"/>
   <link href="${SITE_URL}"/>
@@ -1708,11 +1717,11 @@ Every dynamic calculations utility operates on standard formula modules compiled
     const info = TOOLS_INFO[t.id] || { name: t.name, desc: '' };
     return `
   <entry>
-    <title>${info.name}</title>
+    <title>${escapeXML(info.name)}</title>
     <link href="${SITE_URL}/tools/${t.id}"/>
     <id>${SITE_URL}/tools/${t.id}</id>
     <updated>${new Date().toISOString()}</updated>
-    <summary>${info.desc}</summary>
+    <summary>${escapeXML(info.desc)}</summary>
   </entry>`;
   }).join('')}
 </feed>`;
