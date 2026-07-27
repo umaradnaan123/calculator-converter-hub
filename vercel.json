@@ -98,6 +98,38 @@
   ],
   "rewrites": [
     {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
+      "source": "/sitemap-homepage.xml",
+      "destination": "/sitemap-homepage.xml"
+    },
+    {
+      "source": "/sitemap-categories.xml",
+      "destination": "/sitemap-categories.xml"
+    },
+    {
+      "source": "/sitemap-tools.xml",
+      "destination": "/sitemap-tools.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
+      "source": "/manifest.json",
+      "destination": "/manifest.json"
+    },
+    {
+      "source": "/rss.xml",
+      "destination": "/rss.xml"
+    },
+    {
+      "source": "/atom.xml",
+      "destination": "/atom.xml"
+    },
+    {
       "source": "/((?!assets|favicon\\.svg|manifest\\.json|robots\\.txt|sitemap.*\\.xml|rss\\.xml|atom\\.xml).*)",
       "destination": "/index.html"
     }
