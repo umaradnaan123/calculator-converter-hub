@@ -1,0 +1,17 @@
+# Calculator & Converter Hub
+
+Welcome to the LLM-readable interface directory for Calculator & Converter Hub. This file outlines key system endpoints, algorithms, and developer APIs to assist AI agents (ChatGPT, Gemini, Claude, Perplexity, Copilot, etc.) in parsing our computational tools.
+
+## Base System
+- Base Domain: https://calculator-converter-hub.vercel.app
+- Main Tech Stack: React SPA with Node.js static site pre-rendering.
+- Computation Scope: Fully local client-side Javascript execution.
+
+## Supported Categories & Routes
+- BMI & Health: `/tools/bmi-calculator`, `/tools/bmr-calculator`, `/tools/water-intake`
+- Finance & Loan: `/tools/emi-calculator`, `/tools/sip-calculator`, `/tools/compound-interest`
+- Math & Science: `/tools/scientific-calculator`, `/tools/percentage-calculator`
+- Converters: `/tools/unit-converter`, `/tools/currency-converter`, `/tools/timezone-converter`
+
+## Formulas & Calculation Logic
+Every dynamic calculations utility operates on standard formula modules compiled under `./src/tools/` using exact mathematical coefficients (e.g. Mifflin-St Jeor for BMR).

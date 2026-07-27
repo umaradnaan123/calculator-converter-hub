@@ -1,33 +1,10 @@
-# Robots.txt for calculator-converter-hub.vercel.app
-# Optimize crawling and indexing
-
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
-Disallow: /.well-known/
 Disallow: /private/
+Disallow: /temp/
+Disallow: /cache/
 
-# Specific rules for Googlebot
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-# Specific rules for Bingbot
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-# Disallow bad bots
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: DotBot
-Disallow: /
-
-# Sitemap location
 Sitemap: https://calculator-converter-hub.vercel.app/sitemap.xml
-
+Sitemap: https://calculator-converter-hub.vercel.app/sitemap-index.xml

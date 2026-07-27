@@ -1424,6 +1424,8 @@ function run() {
 </urlset>`;
   fs.writeFileSync(path.join(DIST_DIR, 'sitemap-categories.xml'), sitemapCategoriesContent);
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-categories.xml'), sitemapCategoriesContent);
+  fs.writeFileSync(path.join(DIST_DIR, 'category-sitemap.xml'), sitemapCategoriesContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'category-sitemap.xml'), sitemapCategoriesContent);
 
   // 3. Tools Sitemap
   const sitemapToolsContent = `<?xml version="1.0" encoding="UTF-8"?>
@@ -1438,8 +1440,60 @@ function run() {
 </urlset>`;
   fs.writeFileSync(path.join(DIST_DIR, 'sitemap-tools.xml'), sitemapToolsContent);
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-tools.xml'), sitemapToolsContent);
+  fs.writeFileSync(path.join(DIST_DIR, 'calculator-sitemap.xml'), sitemapToolsContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'calculator-sitemap.xml'), sitemapToolsContent);
 
-  // 4. Sitemap Index
+  // 4. Blog Sitemap (Placeholder for future blog posts)
+  const sitemapBlogContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${SITE_URL}/blog</loc>
+    <lastmod>${lastmodDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>`;
+  fs.writeFileSync(path.join(DIST_DIR, 'blog-sitemap.xml'), sitemapBlogContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'blog-sitemap.xml'), sitemapBlogContent);
+
+  // 5. Image Sitemap
+  const sitemapImageContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>${SITE_URL}/</loc>
+    <image:image>
+      <image:loc>${SITE_URL}/favicon.svg</image:loc>
+      <image:title>Calculator &amp; Converter Hub Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>${SITE_URL}/icons.svg</image:loc>
+      <image:title>Calculator &amp; Converter Hub UI Icons</image:title>
+    </image:image>
+  </url>
+</urlset>`;
+  fs.writeFileSync(path.join(DIST_DIR, 'image-sitemap.xml'), sitemapImageContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'image-sitemap.xml'), sitemapImageContent);
+
+  // 6. Video Sitemap
+  const sitemapVideoContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>${SITE_URL}/</loc>
+    <video:video>
+      <video:thumbnail_loc>${SITE_URL}/favicon.svg</video:thumbnail_loc>
+      <video:title>How to use Calculator &amp; Converter Hub</video:title>
+      <video:description>An overview of using our 500+ free online calculators and unit converters.</video:description>
+      <video:content_loc>${SITE_URL}/video.mp4</video:content_loc>
+      <video:player_loc>${SITE_URL}/</video:player_loc>
+      <video:duration>60</video:duration>
+      <video:publication_date>2026-07-27T00:00:00Z</video:publication_date>
+    </video:video>
+  </url>
+</urlset>`;
+  fs.writeFileSync(path.join(DIST_DIR, 'video-sitemap.xml'), sitemapVideoContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'video-sitemap.xml'), sitemapVideoContent);
+
+  // 7. Sitemap Indexes
   const sitemapIndexContent = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
@@ -1447,17 +1501,168 @@ function run() {
     <lastmod>${lastmodDate}</lastmod>
   </sitemap>
   <sitemap>
-    <loc>${SITE_URL}/sitemap-categories.xml</loc>
+    <loc>${SITE_URL}/category-sitemap.xml</loc>
     <lastmod>${lastmodDate}</lastmod>
   </sitemap>
   <sitemap>
-    <loc>${SITE_URL}/sitemap-tools.xml</loc>
+    <loc>${SITE_URL}/calculator-sitemap.xml</loc>
+    <lastmod>${lastmodDate}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${SITE_URL}/blog-sitemap.xml</loc>
+    <lastmod>${lastmodDate}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${SITE_URL}/image-sitemap.xml</loc>
+    <lastmod>${lastmodDate}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${SITE_URL}/video-sitemap.xml</loc>
     <lastmod>${lastmodDate}</lastmod>
   </sitemap>
 </sitemapindex>`;
   fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapIndexContent);
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapIndexContent);
-  console.log('Saved dynamic split sitemaps and index.xml successfully!');
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-index.xml'), sitemapIndexContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-index.xml'), sitemapIndexContent);
+  console.log('Saved dynamic split sitemaps and index files successfully!');
+
+  // 8. GENERATE ROBOTS.TXT
+  const robotsTxtContent = `User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /cache/
+
+Sitemap: ${SITE_URL}/sitemap.xml
+Sitemap: ${SITE_URL}/sitemap-index.xml`;
+  fs.writeFileSync(path.join(DIST_DIR, 'robots.txt'), robotsTxtContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'robots.txt'), robotsTxtContent);
+
+  // 9. GENERATE MANIFESTS
+  const manifestContent = {
+    "name": "Calculator & Converter Hub",
+    "short_name": "CalcHub",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#09090b",
+    "theme_color": "#6366f1",
+    "description": "Access 500+ free online calculators and unit converters for daily productivity.",
+    "orientation": "any",
+    "categories": ["utilities", "productivity", "education"],
+    "lang": "en-US",
+    "icons": [
+      { "src": "/favicon.svg", "sizes": "48x48 72x72 96x96 128x128 144x144 152x152 192x192 384x384 512x512", "type": "image/svg+xml", "purpose": "any maskable" }
+    ],
+    "shortcuts": [
+      {
+        "name": "Scientific Calculator",
+        "url": "/tools/scientific-calculator",
+        "description": "Perform high-precision scientific calculations"
+      },
+      {
+        "name": "BMI Calculator",
+        "url": "/tools/bmi-calculator",
+        "description": "Calculate Body Mass Index"
+      }
+    ]
+  };
+  const manifestString = JSON.stringify(manifestContent, null, 2);
+  fs.writeFileSync(path.join(DIST_DIR, 'manifest.json'), manifestString);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'manifest.json'), manifestString);
+  fs.writeFileSync(path.join(DIST_DIR, 'manifest.webmanifest'), manifestString);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'manifest.webmanifest'), manifestString);
+
+  // 10. GENERATE BROWSERCONFIG.XML
+  const browserConfigXml = `<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square150x150logo src="/favicon.svg"/>
+      <TileColor>#6366f1</TileColor>
+    </tile>
+  </msapplication>
+</browserconfig>`;
+  fs.writeFileSync(path.join(DIST_DIR, 'browserconfig.xml'), browserConfigXml);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'browserconfig.xml'), browserConfigXml);
+
+  // 11. GENERATE HUMANS.TXT
+  const humansTxt = `/* TEAM */
+Chef Developer: Umar Adnaan
+Site: https://github.com/umaradnaan123
+
+/* SITE */
+Last update: 2026-07-27
+Standards: HTML5, CSS3, ESNext
+Components: React, Vite, TypeScript, Lucide Icons
+Software: Pre-rendered via Node.js SSG
+License: MIT`;
+  fs.writeFileSync(path.join(DIST_DIR, 'humans.txt'), humansTxt);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'humans.txt'), humansTxt);
+
+  // 12. GENERATE SECURITY.TXT
+  const securityTxt = `Contact: mailto:security@calculator-converter-hub.vercel.app
+Expires: 2027-07-27T00:00:00.000Z
+Preferred-Languages: en
+Canonical: ${SITE_URL}/.well-known/security.txt
+Policy: ${SITE_URL}/security-policy`;
+  
+  fs.writeFileSync(path.join(DIST_DIR, 'security.txt'), securityTxt);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'security.txt'), securityTxt);
+
+  fs.mkdirSync(path.join(DIST_DIR, '.well-known'), { recursive: true });
+  fs.mkdirSync(path.join(PUBLIC_DIR, '.well-known'), { recursive: true });
+  fs.writeFileSync(path.join(DIST_DIR, '.well-known', 'security.txt'), securityTxt);
+  fs.writeFileSync(path.join(PUBLIC_DIR, '.well-known', 'security.txt'), securityTxt);
+
+  // 13. GENERATE ADS.TXT
+  const adsTxt = `google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0`;
+  fs.writeFileSync(path.join(DIST_DIR, 'ads.txt'), adsTxt);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'ads.txt'), adsTxt);
+
+  // 14. GENERATE LLMS.TXT
+  const llmsTxt = `# Calculator & Converter Hub
+
+Welcome to the LLM-readable interface directory for Calculator & Converter Hub. This file outlines key system endpoints, algorithms, and developer APIs to assist AI agents (ChatGPT, Gemini, Claude, Perplexity, Copilot, etc.) in parsing our computational tools.
+
+## Base System
+- Base Domain: ${SITE_URL}
+- Main Tech Stack: React SPA with Node.js static site pre-rendering.
+- Computation Scope: Fully local client-side Javascript execution.
+
+## Supported Categories & Routes
+- BMI & Health: \`/tools/bmi-calculator\`, \`/tools/bmr-calculator\`, \`/tools/water-intake\`
+- Finance & Loan: \`/tools/emi-calculator\`, \`/tools/sip-calculator\`, \`/tools/compound-interest\`
+- Math & Science: \`/tools/scientific-calculator\`, \`/tools/percentage-calculator\`
+- Converters: \`/tools/unit-converter\`, \`/tools/currency-converter\`, \`/tools/timezone-converter\`
+
+## Formulas & Calculation Logic
+Every dynamic calculations utility operates on standard formula modules compiled under \`./src/tools/\` using exact mathematical coefficients (e.g. Mifflin-St Jeor for BMR).`;
+  fs.writeFileSync(path.join(DIST_DIR, 'llms.txt'), llmsTxt);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'llms.txt'), llmsTxt);
+
+  // 15. GENERATE FEED.JSON
+  const feedJson = {
+    "version": "https://jsonfeed.org/version/1.1",
+    "title": "Calculator & Converter Hub",
+    "home_page_url": SITE_URL,
+    "feed_url": `${SITE_URL}/feed.json`,
+    "description": "Access free online productivity calculators, unit converters, and developer utility suites.",
+    "items": TOOLS.slice(0, 10).map(t => {
+      const info = TOOLS_INFO[t.id] || { name: t.name, desc: '' };
+      return {
+        "id": `${SITE_URL}/tools/${t.id}`,
+        "url": `${SITE_URL}/tools/${t.id}`,
+        "title": info.name,
+        "summary": info.desc,
+        "date_published": new Date().toISOString()
+      };
+    })
+  };
+  fs.writeFileSync(path.join(DIST_DIR, 'feed.json'), JSON.stringify(feedJson, null, 2));
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'feed.json'), JSON.stringify(feedJson, null, 2));
 
   // GENERATE RSS & ATOM FEEDS
   const buildDate = new Date().toUTCString();
