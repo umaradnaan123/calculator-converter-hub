@@ -767,14 +767,14 @@ function writeHTMLFile(routeDir, fileName, title, desc, canonical, mainHtmlConte
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Calculator & Converter Hub" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:image" content="${SITE_URL}/favicon.svg" />
+    <meta property="og:image" content="${SITE_URL}/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${title}" />
     <meta name="twitter:description" content="${desc}" />
-    <meta name="twitter:image" content="${SITE_URL}/favicon.svg" />
+    <meta name="twitter:image" content="${SITE_URL}/twitter-image.png" />
     <meta name="twitter:image:alt" content="Hub Tools Dashboard Mockup" />
     <meta name="twitter:site" content="@hubtools" />
     <meta name="twitter:creator" content="@hubtools" />
