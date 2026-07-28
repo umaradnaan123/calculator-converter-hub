@@ -1,10 +1,125 @@
+# robots.txt for calculator-converter-hub.vercel.app
+# Version: 2.0
+# Last Updated: July 28, 2024
+
+# ============================================
+# DEFAULT RULES (All Bots)
+# ============================================
+
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
 Disallow: /temp/
-Disallow: /cache/
+Disallow: /test/
+Disallow: /draft/
+Disallow: /*.json$
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*page=
+Disallow: /?*
+Disallow: /search?
+Disallow: /_next/
+Disallow: /.vercel/
+
+# Crawl delay and request rate
+Crawl-delay: 1
+Request-rate: 30/60
+
+# ============================================
+# GOOGLE SPECIFIC RULES
+# ============================================
+
+User-agent: Googlebot
+Allow: /
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+Crawl-delay: 0.1
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /images/
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.webp$
+
+User-agent: Googlebot-Video
+Allow: /
+Allow: /videos/
+
+# ============================================
+# BING SPECIFIC RULES
+# ============================================
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+
+# ============================================
+# BLOCK AGGRESSIVE CRAWLERS
+# ============================================
+
+# Block Ahrefs Bot
+User-agent: AhrefsBot
+Disallow: /
+
+# Block Semrush Bot
+User-agent: SemrushBot
+Disallow: /
+
+# Block MJ12bot (Majestic)
+User-agent: MJ12bot
+Disallow: /
+
+# Block DotBot
+User-agent: DotBot
+Disallow: /
+
+# Block YandexBot if needed
+User-agent: Yandex
+Allow: /
+
+# Block other problematic bots
+User-agent: baiduspider
+Disallow: /
+
+User-agent: YoudaoBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: MojeekBot
+Disallow: /
+
+# ============================================
+# SITEMAPS
+# ============================================
 
 Sitemap: https://calculator-converter-hub.vercel.app/sitemap.xml
 Sitemap: https://calculator-converter-hub.vercel.app/sitemap-index.xml
+
+# ============================================
+# ADDITIONAL RULES
+# ============================================
+
+# Block old/deprecated URL patterns
+User-agent: *
+Disallow: /old/
+Disallow: /v1/
+Disallow: /archive/
