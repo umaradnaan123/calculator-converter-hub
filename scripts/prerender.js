@@ -1404,137 +1404,60 @@ function run() {
   `;
   writeHTMLFile('', '404.html', '404 - Page Not Found | Hub Tools', 'The requested page was not found.', `${SITE_URL}/404`, page404Html, null);
 
-  // GENERATE XML SITEMAPS (SPLIT & INDEX)
+  // GENERATE SINGLE FLAT XML SITEMAP (Simplified)
   const currentDate = new Date().toISOString().split('T')[0];
   const lastmodDate = currentDate;
 
-  // 1. Homepage Sitemap
-  const sitemapHomepageContent = `<?xml version="1.0" encoding="UTF-8"?>
+  const sitemapXmlContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
   <url>
     <loc>${SITE_URL}/</loc>
     <lastmod>${lastmodDate}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-</urlset>`;
-  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-homepage.xml'), sitemapHomepageContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-homepage.xml'), sitemapHomepageContent);
-
-  // 2. Categories Sitemap
-  const sitemapCategoriesContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Categories -->
   ${CATEGORIES.map(c => `  <url>
     <loc>${SITE_URL}/category/${c.id}</loc>
     <lastmod>${lastmodDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>`).join('\n')}
-</urlset>`;
-  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-categories.xml'), sitemapCategoriesContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-categories.xml'), sitemapCategoriesContent);
-  fs.writeFileSync(path.join(DIST_DIR, 'category-sitemap.xml'), sitemapCategoriesContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'category-sitemap.xml'), sitemapCategoriesContent);
-
-  // 3. Tools Sitemap
-  const sitemapToolsContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
+  <!-- Tools -->
   ${TOOLS.map(t => `  <url>
     <loc>${SITE_URL}/tools/${t.id}</loc>
     <lastmod>${lastmodDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <mobile:mobile/>
   </url>`).join('\n')}
 </urlset>`;
-  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-tools.xml'), sitemapToolsContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-tools.xml'), sitemapToolsContent);
-  fs.writeFileSync(path.join(DIST_DIR, 'calculator-sitemap.xml'), sitemapToolsContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'calculator-sitemap.xml'), sitemapToolsContent);
 
-  // 4. Blog Sitemap (Placeholder for future blog posts)
-  const sitemapBlogContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>${SITE_URL}/blog</loc>
-    <lastmod>${lastmodDate}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-</urlset>`;
-  fs.writeFileSync(path.join(DIST_DIR, 'blog-sitemap.xml'), sitemapBlogContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'blog-sitemap.xml'), sitemapBlogContent);
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXmlContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapXmlContent);
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-index.xml'), sitemapXmlContent);
+  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-index.xml'), sitemapXmlContent);
+  console.log('Saved flat sitemap.xml successfully!');
 
-  // 5. Image Sitemap
-  const sitemapImageContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url>
-    <loc>${SITE_URL}/</loc>
-    <image:image>
-      <image:loc>${SITE_URL}/favicon.svg</image:loc>
-      <image:title>Calculator &amp; Converter Hub Logo</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>${SITE_URL}/icons.svg</image:loc>
-      <image:title>Calculator &amp; Converter Hub UI Icons</image:title>
-    </image:image>
-  </url>
-</urlset>`;
-  fs.writeFileSync(path.join(DIST_DIR, 'image-sitemap.xml'), sitemapImageContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'image-sitemap.xml'), sitemapImageContent);
-
-  // 6. Video Sitemap
-  const sitemapVideoContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-  <url>
-    <loc>${SITE_URL}/</loc>
-    <video:video>
-      <video:thumbnail_loc>${SITE_URL}/favicon.svg</video:thumbnail_loc>
-      <video:title>How to use Calculator &amp; Converter Hub</video:title>
-      <video:description>An overview of using our 500+ free online calculators and unit converters.</video:description>
-      <video:content_loc>${SITE_URL}/video.mp4</video:content_loc>
-      <video:player_loc>${SITE_URL}/</video:player_loc>
-      <video:duration>60</video:duration>
-      <video:publication_date>2026-07-27T00:00:00Z</video:publication_date>
-    </video:video>
-  </url>
-</urlset>`;
-  fs.writeFileSync(path.join(DIST_DIR, 'video-sitemap.xml'), sitemapVideoContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'video-sitemap.xml'), sitemapVideoContent);
-
-  // 7. Sitemap Indexes
-  const sitemapIndexContent = `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>${SITE_URL}/sitemap-homepage.xml</loc>
-    <lastmod>${lastmodDate}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${SITE_URL}/category-sitemap.xml</loc>
-    <lastmod>${lastmodDate}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${SITE_URL}/calculator-sitemap.xml</loc>
-    <lastmod>${lastmodDate}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${SITE_URL}/blog-sitemap.xml</loc>
-    <lastmod>${lastmodDate}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${SITE_URL}/image-sitemap.xml</loc>
-    <lastmod>${lastmodDate}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>${SITE_URL}/video-sitemap.xml</loc>
-    <lastmod>${lastmodDate}</lastmod>
-  </sitemap>
-</sitemapindex>`;
-  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapIndexContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapIndexContent);
-  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-index.xml'), sitemapIndexContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-index.xml'), sitemapIndexContent);
-  console.log('Saved dynamic split sitemaps and index files successfully!');
+  // Cleanup old sitemap split assets to prevent 404 indexing errors
+  const cleanupFiles = [
+    'sitemap-homepage.xml',
+    'sitemap-categories.xml',
+    'category-sitemap.xml',
+    'sitemap-tools.xml',
+    'calculator-sitemap.xml',
+    'blog-sitemap.xml',
+    'image-sitemap.xml',
+    'video-sitemap.xml'
+  ];
+  cleanupFiles.forEach(file => {
+    try {
+      if (fs.existsSync(path.join(DIST_DIR, file))) fs.unlinkSync(path.join(DIST_DIR, file));
+      if (fs.existsSync(path.join(PUBLIC_DIR, file))) fs.unlinkSync(path.join(PUBLIC_DIR, file));
+    } catch (e) {
+      // Ignored
+    }
+  });
 
   // 8. GENERATE ROBOTS.TXT
   const robotsTxtContent = `User-agent: *
