@@ -112,7 +112,6 @@ Disallow: /
 # ============================================
 
 Sitemap: https://calculator-converter-hub.vercel.app/sitemap.xml
-Sitemap: https://calculator-converter-hub.vercel.app/sitemap-index.xml
 
 # ============================================
 # ADDITIONAL RULES

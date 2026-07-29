@@ -1435,12 +1435,11 @@ function run() {
 
   fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXmlContent);
   fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap.xml'), sitemapXmlContent);
-  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-index.xml'), sitemapXmlContent);
-  fs.writeFileSync(path.join(PUBLIC_DIR, 'sitemap-index.xml'), sitemapXmlContent);
   console.log('Saved flat sitemap.xml successfully!');
 
   // Cleanup old sitemap split assets to prevent 404 indexing errors
   const cleanupFiles = [
+    'sitemap-index.xml',
     'sitemap-homepage.xml',
     'sitemap-categories.xml',
     'category-sitemap.xml',
@@ -1574,7 +1573,6 @@ Disallow: /
 # ============================================
 
 Sitemap: ${SITE_URL}/sitemap.xml
-Sitemap: ${SITE_URL}/sitemap-index.xml
 
 # ============================================
 # ADDITIONAL RULES
