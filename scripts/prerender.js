@@ -1410,26 +1410,17 @@ function run() {
 
   const sitemapXmlContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Homepage -->
   <url>
     <loc>${SITE_URL}/</loc>
     <lastmod>${lastmodDate}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-  <!-- Categories -->
   ${CATEGORIES.map(c => `  <url>
     <loc>${SITE_URL}/category/${c.id}</loc>
     <lastmod>${lastmodDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>`).join('\n')}
-  <!-- Tools -->
-  ${TOOLS.map(t => `  <url>
-    <loc>${SITE_URL}/tools/${t.id}</loc>
-    <lastmod>${lastmodDate}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
   </url>`).join('\n')}
 </urlset>`;
 
