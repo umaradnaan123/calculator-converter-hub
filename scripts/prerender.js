@@ -1383,6 +1383,24 @@ function run() {
         <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 16px;">Disclaimer</h1>
         <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">The information and calculations provided by Calculator & Converter Hub are for educational and informational purposes only. While every effort is made to maintain mathematical accuracy, our tools should not be construed as professional medical, legal, tax, or financial advice. Always consult a qualified professional before making major health or financial decisions.</p>
       `
+    },
+    {
+      id: 'contact',
+      title: 'Contact Us - Calculator & Converter Hub',
+      desc: 'Get in touch with the Calculator & Converter Hub development and editorial team for support, feature requests, or mathematical formula suggestions.',
+      content: `
+        <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 16px;">Contact Us</h1>
+        <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">Have feedback, a feature request, or found a math discrepancy in one of our calculation tools? Reach out to our team at support@calculator-converter-hub.com. We respond to all inquiries within 24–48 business hours.</p>
+      `
+    },
+    {
+      id: 'editorial-policy',
+      title: 'Editorial Policy - Calculator & Converter Hub',
+      desc: 'Learn about our editorial standards, mathematical verification workflows, expert review guidelines, and formula update cycles.',
+      content: `
+        <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 16px;">Editorial Policy</h1>
+        <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">Our tools are engineered under strict mathematical guidelines. All formulas (financial loan math, body mass index ratios, thermodynamic unit conversions) are sourced from peer-reviewed scientific literature or official government tax/banking guidelines. Pages are periodically reviewed and updated to reflect changing financial rates and medical standards.</p>
+      `
     }
   ];
 

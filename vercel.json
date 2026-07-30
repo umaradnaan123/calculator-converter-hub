@@ -253,6 +253,10 @@
     {
       "source": "/disclaimer",
       "destination": "/index.html"
+    },
+    {
+      "source": "/editorial-policy",
+      "destination": "/index.html"
     }
   ]
 }
