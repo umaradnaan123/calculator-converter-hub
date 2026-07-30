@@ -1374,6 +1374,15 @@ function run() {
         <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 16px;">Cookie Policy</h1>
         <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">We do not use tracking or advertising cookies. We use browser Local Storage to remember your preferred dark/light theme, bookmarks, and calculation history. This data remains on your machine and can be cleared via settings.</p>
       `
+    },
+    {
+      id: 'disclaimer',
+      title: 'Disclaimer - Calculator & Converter Hub',
+      desc: 'Read our site disclaimer regarding computational accuracy, financial estimations, and health recommendations.',
+      content: `
+        <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 16px;">Disclaimer</h1>
+        <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px;">The information and calculations provided by Calculator & Converter Hub are for educational and informational purposes only. While every effort is made to maintain mathematical accuracy, our tools should not be construed as professional medical, legal, tax, or financial advice. Always consult a qualified professional before making major health or financial decisions.</p>
+      `
     }
   ];
 
@@ -1404,23 +1413,39 @@ function run() {
   `;
   writeHTMLFile('', '404.html', '404 - Page Not Found | Hub Tools', 'The requested page was not found.', `${SITE_URL}/404`, page404Html, null);
 
-  // GENERATE SINGLE FLAT XML SITEMAP (Simplified)
+  // GENERATE SINGLE FLAT XML SITEMAP
   const currentDate = new Date().toISOString().split('T')[0];
   const lastmodDate = currentDate;
 
   const sitemapXmlContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage -->
   <url>
     <loc>${SITE_URL}/</loc>
     <lastmod>${lastmodDate}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  <!-- Category Pages -->
   ${CATEGORIES.map(c => `  <url>
     <loc>${SITE_URL}/category/${c.id}</loc>
     <lastmod>${lastmodDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>`).join('\n')}
+  <!-- Individual Calculator Pages -->
+  ${TOOLS.map(t => `  <url>
+    <loc>${SITE_URL}/tools/${t.id}</loc>
+    <lastmod>${lastmodDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`).join('\n')}
+  <!-- Trust & Legal Pages -->
+  ${trustPages.map(p => `  <url>
+    <loc>${SITE_URL}/${p.id}</loc>
+    <lastmod>${lastmodDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>`).join('\n')}
 </urlset>`;
 
