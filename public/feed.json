@@ -10,70 +10,70 @@
       "url": "https://calculator-converter-hub.vercel.app/tools/age-calculator",
       "title": "Age Calculator",
       "summary": "Compute your exact age in years, months, weeks, days, hours, and seconds since your birthdate.",
-      "date_published": "2026-07-30T09:45:11.862Z"
+      "date_published": "2026-07-31T06:10:31.729Z"
     },
     {
       "id": "https://calculator-converter-hub.vercel.app/tools/date-difference",
       "url": "https://calculator-converter-hub.vercel.app/tools/date-difference",
       "title": "Date Difference Calculator",
       "summary": "Calculate the total days, weeks, months, and years between any two calendar dates.",
-      "date_published": "2026-07-30T09:45:11.862Z"
+      "date_published": "2026-07-31T06:10:31.729Z"
     },
     {
       "id": "https://calculator-converter-hub.vercel.app/tools/countdown-timer",
       "url": "https://calculator-converter-hub.vercel.app/tools/countdown-timer",
       "title": "Event Countdown",
       "summary": "Set up countdown timers for custom events, weddings, projects, and holidays.",
-      "date_published": "2026-07-30T09:45:11.862Z"
+      "date_published": "2026-07-31T06:10:31.729Z"
     },
     {
       "id": "https://calculator-converter-hub.vercel.app/tools/unit-converter",
       "url": "https://calculator-converter-hub.vercel.app/tools/unit-converter",
       "title": "Universal Unit Converter",
       "summary": "Convert length, weight, volume, area, temperature, speed, time, and data units instantly.",
-      "date_published": "2026-07-30T09:45:11.862Z"
+      "date_published": "2026-07-31T06:10:31.729Z"
     },
     {
       "id": "https://calculator-converter-hub.vercel.app/tools/currency-converter",
       "url": "https://calculator-converter-hub.vercel.app/tools/currency-converter",
       "title": "Live Currency Converter",
       "summary": "Calculate global exchange rates instantly using live financial rates feeds.",
-      "date_published": "2026-07-30T09:45:11.862Z"
+      "date_published": "2026-07-31T06:10:31.729Z"
     },
     {
       "id": "https://calculator-converter-hub.vercel.app/tools/emi-calculator",
       "url": "https://calculator-converter-hub.vercel.app/tools/emi-calculator",
       "title": "Loan EMI Calculator",
       "summary": "Calculate monthly home, auto, or personal loan payments with complete interest amortization schedule reports.",
-      "date_published": "2026-07-30T09:45:11.862Z"
+      "date_published": "2026-07-31T06:10:31.729Z"
     },
     {
       "id": "https://calculator-converter-hub.vercel.app/tools/sip-calculator",
       "url": "https://calculator-converter-hub.vercel.app/tools/sip-calculator",
       "title": "SIP Calculator",
       "summary": "Calculate compounding future wealth and estimated returns on systematic investment plans in mutual funds.",
-      "date_published": "2026-07-30T09:45:11.862Z"
+      "date_published": "2026-07-31T06:10:31.729Z"
     },
     {
       "id": "https://calculator-converter-hub.vercel.app/tools/compound-interest",
       "url": "https://calculator-converter-hub.vercel.app/tools/compound-interest",
       "title": "Compound Interest Calculator",
       "summary": "Calculate compounding interest growth with custom contributions and frequency parameters.",
-      "date_published": "2026-07-30T09:45:11.862Z"
+      "date_published": "2026-07-31T06:10:31.729Z"
     },
     {
       "id": "https://calculator-converter-hub.vercel.app/tools/bmi-calculator",
       "url": "https://calculator-converter-hub.vercel.app/tools/bmi-calculator",
       "title": "BMI Calculator",
       "summary": "Evaluate Body Mass Index (BMI) and health classifications based on World Health Organization standards.",
-      "date_published": "2026-07-30T09:45:11.862Z"
+      "date_published": "2026-07-31T06:10:31.729Z"
     },
     {
       "id": "https://calculator-converter-hub.vercel.app/tools/bmr-calculator",
       "url": "https://calculator-converter-hub.vercel.app/tools/bmr-calculator",
       "title": "BMR Calorie Calculator",
       "summary": "Estimate your active Basal Metabolic Rate daily energy budget based on age, gender, and metrics.",
-      "date_published": "2026-07-30T09:45:11.862Z"
+      "date_published": "2026-07-31T06:10:31.729Z"
     }
   ]
 }
