@@ -58,12 +58,16 @@ htmlFiles.forEach((file) => {
   }
 
   // Canonical check
-  const canonicalMatch = content.match(/<link\s+rel=["']canonical["']\s+href=["'](.*?)["']/i);
-  if (!canonicalMatch || !canonicalMatch[1].trim()) {
+  const canonicalMatches = content.match(/<link\s+rel=["']canonical["']\s+href=["'](.*?)["']/gi) || [];
+  if (canonicalMatches.length === 0) {
     missingCanonical++;
     console.error(`❌ Missing canonical tag: ${relPath}`);
+  } else if (canonicalMatches.length > 1) {
+    missingCanonical++;
+    console.error(`❌ Multiple canonical tags found (${canonicalMatches.length}) on: ${relPath}`);
   } else {
-    const canonical = canonicalMatch[1].trim();
+    const singleMatch = content.match(/<link\s+rel=["']canonical["']\s+href=["'](.*?)["']/i);
+    const canonical = singleMatch[1].trim();
     canonicalsMap.set(canonical, (canonicalsMap.get(canonical) || 0) + 1);
     if (canonical.includes('#')) hashUrlCount++;
     if (canonical.includes('?')) queryParamCount++;

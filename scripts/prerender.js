@@ -757,6 +757,9 @@ function writeHTMLFile(routeDir, fileName, title, desc, canonical, mainHtmlConte
     template = template.replace('</head>', `<meta name="description" content="${desc}" />\n</head>`);
   }
 
+  // Clean up any pre-existing canonical tags to prevent duplicates
+  template = template.replace(/<link\s+rel=["']canonical["'].*?\/>/gi, '');
+
   // Inject Enterprise Meta tags, Open Graph and Twitter Cards
   const seoHeaderTags = `
     <link rel="canonical" href="${canonical}" />
